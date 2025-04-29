@@ -1,0 +1,262 @@
+%-------------------------
+% Resume in Latex
+% Author : Ashish Singh
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage[pro]{fontawesome5}
+
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[3]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \textit{\footnotesize{#3}}
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\newcommand{\name}{Ashish Singh} % Your Name
+\newcommand{\course}{Chemical Engineering} % Your Program
+\newcommand{\phone}{9320459871} % Your Phone Number
+\newcommand{\emaila}{ashishsingh1501@gmail.com} %Email 1
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{tabularx}{\textwidth}{X r}  % X for left-aligned, r for right-aligned
+    \textbf{\Huge Ashish Singh}  & \faPhone\ +91-9320459871 \\
+      & \faEnvelope\ \href{mailto:ashishsingh1501@gmail.com}{ashishsingh1501@gmail.com} \\
+    {Area of Interest} & \faGithub\ \href{https://github.com/morancium}{GitHub Profile} \\
+    Technical: \textit{Computer Vision, Generative AI, AI Explainability} & \faLinkedin\ \href{https://www.linkedin.com/in/ashishsingh1501/}{LinkedIn Profile} \\
+    Extracurricular: \textit{Badminton, Hiking, Public speaking, Tutoring}
+\end{tabularx}
+}
+\vspace{-5.5 pt}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Indian Institute of Technology, Roorkee}{2020 --2024}
+      {Bachelor of Technology in Chemical Engineering}{8.1/10}
+  \resumeSubHeadingListEnd
+
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Analyst 2 - Data Science }{June 2024- Present}
+      {Accordion}{Hyderabad}
+      \resumeItemListStart
+        \resumeItem{Pioneered geospatial analytics by harnessing satellite imagery, sales trends, and demographic insights to pinpoint high-opportunity regions for solar panel deployment.}
+        \resumeItem{Integrated geospatial intelligence into a linear optimization model, identifying 500+ high-potential ZIP codes and driving strategic market expansion.}
+        \resumeItem{Implemented data-driven workforce scheduling, boosting installation efficiency by 50\% while cutting costs 40\%}
+        \resumeItem{Engineered advanced computer vision solutions (YOLO, Detectron) with semi-supervised learning to enhance solar panel detection, refining market segmentation and targeting accuracy by 34\%.}
+      \resumeItemListEnd
+      
+% -----------Multiple Positions Heading-----------
+   % \resumeSubSubheading
+   %  {Software Engineer I}{Oct 2014 - Sep 2016}
+   %  \resumeItemListStart
+   %     \resumeItem{Apache Beam}
+   %       {Apache Beam is a unified model for defining both batch and streaming data-parallel processing pipelines}
+   %  \resumeItemListEnd
+   % \resumeSubHeadingListEnd
+%-------------------------------------------
+
+    \resumeSubheading
+      {AI Research Intern - Deepfake Detection}{April 2024 - June 2024}
+      {ConTrails.ai}{Remote}
+      \resumeItemListStart
+        \resumeItem{Designed custom datasets utilizing deepfake generation models, including FaceSwap, LipSync, and Talking Head.}
+        \resumeItem{Constructed a preprocessing pipeline that downloaded specific YouTube videos, standardized them to 25 fps, and cropped clips to focus on points of interest (POI).}
+        \resumeItem{Created high-fidelity deepfake datasets using FaceFusion, Video Retalking, etc., enhancing model training.}
+        \resumeItem{Utilized DeepFakeBench to fine-tune the Xception model, achieving 95\% accuracy on the custom dataset.}
+    \resumeItemListEnd
+
+    \resumeSubheading
+      {Python and Machine Learning Intern}{December 2023 - February 2024}
+      {Swar Yantra Technologies Pvt. Ltd.}{Remote}
+      \resumeItemListStart
+        \resumeItem{Used open-source LLMs and embedding models from HuggingFace to enhance document analysis capabilities.}
+        \resumeItem{Leveraged Language Models for accurate extraction of specific fields from various document types.}
+        \resumeItem{Refined prompt engineering techniques, improving document extraction accuracy by 20\%.}
+      \resumeItemListEnd
+
+      \resumeSubheading
+      {Decision Analytics Intern}{May 2023 - July 2023}
+      {EXL Services}{Remote}
+      \resumeItemListStart
+        \resumeItem{Delivered an automated data extraction pipeline using OCR and Regex, reducing manual processing time by 60\%}
+        \resumeItem{Integrated language models to develop personalized expense reports that support natural language querying.}
+        \resumeItem{Hosted a web interface to improve user interaction with bank statements, streamlining data analysis processes.}
+    \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{Gen AI-powered Business Development Assistant} $|$  \emph{Generative AI, Python, Streamlit, Faiss, Langchain}}{}
+          {AI-powered Business Development Assistant for client insights, case study recommendations, and strategy automation}
+          \resumeItemListStart
+            \resumeItem{Built AI assistant analyzing 100+ sources to identify client pain points and engagement opportunities.}
+            \resumeItem{Developed case study recommendation engine with an active feedback-driven chatbot optimizing solution matching}
+            \resumeItem{Systematized PowerPoint reporting tool with Streamlit interface, reducing the manual effort from 40 to 2 hours weekly and automating strategy exports.}
+          \resumeItemListEnd
+      \resumeProjectHeading
+          {\textbf{The Vital Extraction Challenge} $|$ \emph{Computer Vision, Python, Pytorch, OpenCV, YOLO, Git}}{}
+          {A computer vision model to extract 5+ key vital signs from an image of an ECG monitor in the wild.}
+          \resumeItemListStart
+            \resumeItem{Secured Silver medal in Inter-IIT Tech Meet 11.0 by achieving 93.26\% accuracy in ECG vital sign extraction.}
+            \resumeItem{Utilized advanced models, data augmentation, noise reduction, and semi-supervised learning, optimizing inference speed to 2.3 seconds on Google Colab CPU.}
+          \resumeItemListEnd
+
+        \resumeProjectHeading
+          {\textbf{Image Colorization Using Conditional GANs} $|$ \emph{Generative AI, Python, Pytorch, FastAPI, COCO dataset}}{}
+          {A pipeline for colorizing black-and-white images using deep learning techniques.}
+          \resumeItemListStart
+            \resumeItem{Developed an automated image colorization model using Conditional GANs based on the Pix2Pix architecture.}
+            % \resumeItem{Integrated a pre-trained ResNet18 model as a backbone to enhance feature extraction in PyTorch.}
+            \resumeItem{Optimized model performance through adversarial training, data augmentation, and hyperparameter tuning.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+
+
+%
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Python, SQL, C/C++, MATLAB, JavaScript} \\
+     % \textbf{Frameworks}{: React, Node.js, Flask, JUnit, WordPress, Material-UI, FastAPI} \\
+     \textbf{Developer Tools}{: Git, Google APIs, VS Code, PyCharm, Streamlit, CVAT, Roboflow} \\
+     \textbf{Libraries}{: PyTorch, Transformers, Tensorflow, Numpy, Scikit-Learn, Regex, Pandas, LangChain} \\
+     \textbf{Additional Courses}{: Stanford Online: CS224n, CS229, Statistics 110: Probability, Data Mining for Business Intelligence.}
+    }}
+ \end{itemize}
+
+
+
+ \section{Positions of Responsibility}
+ \resumeSubHeadingListStart
+     \resumeProjectHeading
+       {\textbf{Head, AI/ML Vertical} $|$ \emph{Artificial Intelligence and Electronics Society, IITR}}{May 2023 - May 2024}
+       {Headed a 60+ member AI/ML team, driving competition success and hands-on ML project development.}
+
+     \resumeProjectHeading
+       {\textbf{UGTA} $|$ \emph{Academic Reinforcement Program}}{Jan 2022 - March 2022}
+       {Provided guidance and mentoring to first-year students in MAN001 course}
+ \resumeSubHeadingListEnd
+
+\section{Achievements}
+ \resumeSubHeadingListStart
+     \resumeProjectHeading
+       {\textbf{Silver Meda} $|$ \emph{Inter-IIT Tech Meet 11.0}}{2023}
+       {Secured 2nd place among 23 IITs in mid-prep PS of Inter-IIT Tech Meet 11.0}
+
+     \resumeProjectHeading
+       {\textbf{Gold Medal} $|$ \emph{Integration Bee}}{2023}
+       {Secured 1st place among 65 teams in Integration Bee 2023}
+     \resumeProjectHeading
+       {\textbf{Mentee} $|$ \emph{Amazon ML Summer School}}{2023}
+       {Ranked in the top 5\% of Amazon ML Summer School participants}
+ \resumeSubHeadingListEnd
+
+%-------------------------------------------
+\end{document}
