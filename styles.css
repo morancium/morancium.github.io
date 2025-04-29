@@ -604,6 +604,14 @@ footer {
     100% { transform: scale(0.8); opacity: 0.5; }
 }
 
+/* Menu toggle button (hidden on desktop) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .hero-content {
@@ -611,8 +619,56 @@ footer {
         text-align: center;
     }
 
+    nav {
+        position: relative;
+    }
+
     nav ul {
         display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-primary);
+        flex-direction: column;
+        padding: 1rem 0;
+        box-shadow: var(--shadow);
+        z-index: 1000;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+
+    /* Show menu toggle on mobile */
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+        color: var(--text-primary);
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    /* Keep theme toggle visible on mobile */
+    #theme-toggle {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001;
     }
 
     .profile-photo {
@@ -621,6 +677,7 @@ footer {
 
     .cta-buttons {
         justify-content: center;
+        flex-wrap: wrap;
     }
 
     .data-visualization {

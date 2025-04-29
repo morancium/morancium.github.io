@@ -24,6 +24,37 @@ document.addEventListener('DOMContentLoaded', () => {
         icon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
     }
 
+    // Mobile menu toggle functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.querySelector('nav ul');
+    
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            
+            // Toggle menu icon
+            const menuIcon = menuToggle.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const menuIcon = menuToggle.querySelector('i');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+    }
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -64,28 +95,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const dataCube = document.querySelector('.data-cube');
     const dataPoints = document.querySelectorAll('.data-point');
 
-    // Add hover effect to data cube
-    dataCube.addEventListener('mouseover', () => {
-        dataCube.style.animationPlayState = 'paused';
-    });
+    if (dataCube) {
+        // Add hover effect to data cube
+        dataCube.addEventListener('mouseover', () => {
+            dataCube.style.animationPlayState = 'paused';
+        });
 
-    dataCube.addEventListener('mouseout', () => {
-        dataCube.style.animationPlayState = 'running';
-    });
+        dataCube.addEventListener('mouseout', () => {
+            dataCube.style.animationPlayState = 'running';
+        });
 
-    // Add random movement to data points
-    dataPoints.forEach(point => {
-        setInterval(() => {
-            const x = Math.random() * 100;
-            const y = Math.random() * 100;
-            point.style.transform = `translate(${x}px, ${y}px)`;
-        }, 3000);
-    });
+        // Add random movement to data points
+        dataPoints.forEach(point => {
+            setInterval(() => {
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                point.style.transform = `translate(${x}px, ${y}px)`;
+            }, 3000);
+        });
+    }
 
     // Add scroll-based parallax effect to hero section
     const hero = document.querySelector('#hero');
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-    });
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    }
 }); 
