@@ -1,15 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Theme toggle functionality
     const themeToggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
     const icon = themeToggle.querySelector('i');
-
+    const html = document.documentElement;
+    
     // Check for saved theme preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        html.setAttribute('data-theme', savedTheme);
-        updateThemeIcon(savedTheme);
-    }
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    html.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
 
     themeToggle.addEventListener('click', () => {
         const currentTheme = html.getAttribute('data-theme');
@@ -24,36 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
         icon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
     }
 
-    // Mobile menu toggle functionality
-    const menuToggle = document.getElementById('menu-toggle');
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('nav ul');
     
-    if (menuToggle && navMenu) {
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            
-            // Toggle menu icon
-            const menuIcon = menuToggle.querySelector('i');
-            if (navMenu.classList.contains('active')) {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
-            } else {
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            }
-        });
-        
-        // Close mobile menu when clicking on a link
-        const navLinks = document.querySelectorAll('nav ul li a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                const menuIcon = menuToggle.querySelector('i');
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-            });
-        });
-    }
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        menuToggle.innerHTML = navMenu.classList.contains('active') 
+            ? '<i class="fas fa-times"></i>' 
+            : '<i class="fas fa-bars"></i>';
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            navMenu.classList.remove('active');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

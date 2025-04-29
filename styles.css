@@ -71,31 +71,62 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
     height: 100%;
+    padding: 0 2rem;
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
     color: var(--accent-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 nav ul {
     display: flex;
-    align-items: center;
+    gap: 2.5rem;
     list-style: none;
-    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    align-items: center;
 }
 
-nav ul li a {
+nav ul li {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+nav a {
     color: var(--text-primary);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    position: relative;
+    padding: 0.5rem 0;
 }
 
-nav ul li a:hover {
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-primary);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover {
     color: var(--accent-primary);
 }
 
@@ -104,13 +135,30 @@ nav ul li a:hover {
     border: none;
     color: var(--text-primary);
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     padding: 0.5rem;
-    transition: color 0.3s;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 #theme-toggle:hover {
     color: var(--accent-primary);
+    transform: rotate(15deg);
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    height: 100%;
+    align-items: center;
 }
 
 /* Hero Section */
@@ -604,14 +652,6 @@ footer {
     100% { transform: scale(0.8); opacity: 0.5; }
 }
 
-/* Menu toggle button (hidden on desktop) */
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .hero-content {
@@ -620,20 +660,21 @@ footer {
     }
 
     nav {
-        position: relative;
+        padding: 0 1rem;
     }
 
     nav ul {
         display: none;
         position: absolute;
-        top: 70px;
+        top: 100%;
         left: 0;
-        width: 100%;
-        background-color: var(--bg-primary);
+        right: 0;
+        background: var(--bg-primary);
+        padding: 1rem;
         flex-direction: column;
-        padding: 1rem 0;
-        box-shadow: var(--shadow);
-        z-index: 1000;
+        gap: 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        height: auto;
     }
 
     nav ul.active {
@@ -641,34 +682,22 @@ footer {
     }
 
     nav ul li {
+        height: auto;
         width: 100%;
-        text-align: center;
+    }
+
+    nav a {
+        width: 100%;
         padding: 0.5rem 0;
     }
 
-    /* Show menu toggle on mobile */
     .menu-toggle {
-        display: block;
-        position: absolute;
-        left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 1.5rem;
-        color: var(--text-primary);
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 1001;
+        display: flex;
     }
 
-    /* Keep theme toggle visible on mobile */
     #theme-toggle {
-        display: block;
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 1001;
+        margin-left: auto;
+        margin-right: 1rem;
     }
 
     .profile-photo {
