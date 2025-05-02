@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Spotter: Deep Learning for Precise Pixel Localization - Ashish Singh</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .blog-post img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .blog-post h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-post .meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+        .blog-post .content {
+            line-height: 1.8;
+        }
+        .blog-post .content h2 {
+            margin: 2rem 0 1rem;
+            color: var(--accent-primary);
+        }
+        .blog-post .content p {
+            margin-bottom: 1.5rem;
+        }
+        .blog-post .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        .blog-post .content li {
+            margin-bottom: 0.5rem;
+        }
+        .blog-post .content code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+        .back-to-blog:hover {
+            color: var(--accent-secondary);
+        }
+        .model-architecture {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .model-architecture h3 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+        .results-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .results-gallery img {
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        .results-gallery img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">AS</div>
+            <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#timeline">Timeline</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#achievements">Achievements</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+            </ul>
+            <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <h1>Pixel Spotter: Deep Learning for Precise Pixel Localization</h1>
+            <div class="meta">
+                <span><i class="far fa-calendar"></i> May 1, 2024</span>
+                <span><i class="far fa-folder"></i> AI & Deep Learning</span>
+            </div>
+            
+            <div class="content">
+                <img src="assest/pixel-spotter-thumbnail.png" alt="Pixel Spotter Project">
+                
+                <h2>Introduction</h2>
+                <p>The Pixel Spotter project presents an interesting challenge in the field of computer vision and deep learning: predicting the exact coordinates of a single white pixel (value 255) in a 50x50 grayscale image where all other pixels are black (value 0). This seemingly simple task provides valuable insights into the capabilities and limitations of different deep learning architectures.</p>
+
+                <h2>Problem Statement</h2>
+                <p>The core challenge was to develop a deep learning model that could accurately predict the (x,y) coordinates of a single white pixel in a 50x50 grayscale image. The task required:</p>
+                <ul>
+                    <li>Generating a synthetic dataset of 50x50 images with a single white pixel</li>
+                    <li>Designing and training a model to predict pixel coordinates</li>
+                    <li>Evaluating different model architectures and hyperparameters</li>
+                    <li>Comparing performance between custom and pre-trained models</li>
+                </ul>
+
+                <h2>Technical Approach</h2>
+                <p>I implemented two different approaches to solve this problem:</p>
+
+                <div class="model-architecture">
+                    <h3>1. Baseline CNN Model</h3>
+                    <ul>
+                        <li>3 CNN layers with ReLU activation</li>
+                        <li>MaxPool layers for downsampling</li>
+                        <li>2 Fully Connected layers with Dropout</li>
+                        <li>Final layer predicting (x,y) coordinates</li>
+                    </ul>
+                </div>
+
+                <div class="model-architecture">
+                    <h3>2. Pre-trained ResNet18 Model</h3>
+                    <ul>
+                        <li>Fine-tuned pre-trained ResNet18 architecture</li>
+                        <li>Added custom input layer for 50x50 images</li>
+                        <li>Modified final layer for coordinate prediction</li>
+                        <li>Leveraged transfer learning benefits</li>
+                    </ul>
+                </div>
+
+                <h2>Implementation Details</h2>
+                <p>The project was implemented using:</p>
+                <ul>
+                    <li><strong>Python</strong> as the primary programming language</li>
+                    <li><strong>PyTorch</strong> for deep learning implementation</li>
+                    <li><strong>NumPy</strong> for data generation and manipulation</li>
+                    <li><strong>PIL</strong> for image processing</li>
+                </ul>
+
+                <h2>Training Process</h2>
+                <p>Key aspects of the training process:</p>
+                <ul>
+                    <li>Generated 2500 training samples</li>
+                    <li>Used Mean Squared Error (MSE) loss function</li>
+                    <li>Employed Adam optimizer</li>
+                    <li>Experimented with different learning rates (0.0001, 0.001)</li>
+                    <li>Varied number of epochs (16, 32, 64)</li>
+                </ul>
+
+                <h2>Results and Analysis</h2>
+                <p>The project yielded interesting results:</p>
+                <ul>
+                    <li>Baseline CNN achieved good accuracy with 64 epochs and learning rate 0.001</li>
+                    <li>Pre-trained ResNet18 outperformed the baseline model significantly</li>
+                    <li>Higher learning rates helped converge faster</li>
+                    <li>More epochs generally improved performance</li>
+                </ul>
+
+                <div class="results-gallery">
+                    <img src="assest/Epoch64_lr_0.001.png" alt="Baseline Model Results">
+                    <img src="assest/Visual_Resnet18.png" alt="ResNet18 Model Results">
+                </div>
+
+                <h2>Challenges and Solutions</h2>
+                <p>Key challenges faced during development:</p>
+                <ul>
+                    <li><strong>Limited Dataset Size:</strong> Addressed through careful model architecture selection</li>
+                    <li><strong>Overfitting:</strong> Mitigated using dropout layers and regularization</li>
+                    <li><strong>Precision Requirements:</strong> Solved through careful hyperparameter tuning</li>
+                </ul>
+
+                <h2>Future Improvements</h2>
+                <p>Potential areas for future enhancement:</p>
+                <ul>
+                    <li>Implementing YOLO-based approach for bounding box prediction</li>
+                    <li>Exploring SVM for regression task</li>
+                    <li>Increasing dataset size and diversity</li>
+                    <li>Implementing ensemble methods</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>The Pixel Spotter project demonstrates the effectiveness of deep learning in solving precise localization tasks. The comparison between custom CNN and pre-trained ResNet18 architectures provides valuable insights into the trade-offs between model complexity and performance. The project highlights the importance of proper model selection, hyperparameter tuning, and the benefits of transfer learning in computer vision tasks.</p>
+
+                <a href="blog.html" class="back-to-blog">
+                    <i class="fas fa-arrow-left"></i> Back to Blog
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ashish Singh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

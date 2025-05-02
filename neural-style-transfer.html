@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Neural Style Transfer - Ashish Singh</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .blog-post img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .blog-post h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-post .meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+        .blog-post .content {
+            line-height: 1.8;
+        }
+        .blog-post .content h2 {
+            margin: 2rem 0 1rem;
+            color: var(--accent-primary);
+        }
+        .blog-post .content p {
+            margin-bottom: 1.5rem;
+        }
+        .blog-post .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        .blog-post .content li {
+            margin-bottom: 0.5rem;
+        }
+        .blog-post .content code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+        .back-to-blog:hover {
+            color: var(--accent-secondary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">AS</div>
+            <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#timeline">Timeline</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#achievements">Achievements</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+            </ul>
+            <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <h1>Understanding Neural Style Transfer: A Deep Dive into Artistic AI</h1>
+            <div class="meta">
+                <span><i class="far fa-calendar"></i> May 1, 2024</span>
+                <span><i class="far fa-folder"></i> AI & Machine Learning</span>
+            </div>
+            
+            <div class="content">
+                <img src="assest/style-transfer-thumbnail.png" alt="Neural Style Transfer Example">
+                
+                <h2>Introduction</h2>
+                <p>Neural Style Transfer (NST) is a fascinating application of deep learning that combines the content of one image with the style of another. This technique has gained popularity for creating artistic and visually appealing images. In this article, we'll explore the implementation of NST using the VGG19 model and understand how it works under the hood.</p>
+
+                <h2>What is Neural Style Transfer?</h2>
+                <p>NST refers to a class of software algorithms that manipulate digital images to adopt the appearance or visual style of another image. The basic idea is to define a content loss and a style loss, which are then minimized to generate a new image that preserves the content of one image and the style of another.</p>
+
+                <h2>Key Components</h2>
+                <ul>
+                    <li><strong>Content Image (c):</strong> The image we want to transfer a style to</li>
+                    <li><strong>Style Image (s):</strong> The image we want to transfer the style from</li>
+                    <li><strong>Generated Image (g):</strong> The final output image (the only trainable variable)</li>
+                </ul>
+
+                <h2>Technical Implementation</h2>
+                <p>The implementation uses a pre-trained VGG19 model, which is trained on ImageNet images. The model's architecture is particularly suited for this task because:</p>
+                <ul>
+                    <li>Deeper layers (like conv5_2) extract complex content features</li>
+                    <li>Shallow layers (conv1_1 to conv5_1) detect style features like lines and edges</li>
+                </ul>
+
+                <h2>Loss Functions</h2>
+                <p>The magic of NST lies in its two main loss functions:</p>
+                <ul>
+                    <li><strong>Content Loss:</strong> Ensures the generated image maintains the content of the original image by comparing activations in higher layers</li>
+                    <li><strong>Style Loss:</strong> Uses Gram matrices to capture style information by comparing feature correlations across different layers</li>
+                </ul>
+
+                <h2>Implementation Details</h2>
+                <p>The project uses PyTorch and implements several key components:</p>
+                <ul>
+                    <li>Image loading and preprocessing</li>
+                    <li>Feature extraction from specific VGG19 layers</li>
+                    <li>Gram matrix calculation for style representation</li>
+                    <li>Optimization using Adam optimizer</li>
+                </ul>
+
+                <h2>Results and Applications</h2>
+                <p>The implementation successfully demonstrates how to:</p>
+                <ul>
+                    <li>Transform photos into artistic masterpieces</li>
+                    <li>Combine different artistic styles</li>
+                    <li>Create unique visual effects</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>Neural Style Transfer represents an exciting intersection of art and technology. By understanding and implementing these concepts, we can create powerful tools for artistic expression and explore new possibilities in computer vision.</p>
+
+                <a href="blog.html" class="back-to-blog">
+                    <i class="fas fa-arrow-left"></i> Back to Blog
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ashish Singh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

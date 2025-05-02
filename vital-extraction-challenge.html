@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inter-IIT Vital Extraction Challenge - Ashish Singh</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .blog-post img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .blog-post h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-post .meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+        .blog-post .content {
+            line-height: 1.8;
+        }
+        .blog-post .content h2 {
+            margin: 2rem 0 1rem;
+            color: var(--accent-primary);
+        }
+        .blog-post .content p {
+            margin-bottom: 1.5rem;
+        }
+        .blog-post .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        .blog-post .content li {
+            margin-bottom: 0.5rem;
+        }
+        .blog-post .content code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+        .back-to-blog:hover {
+            color: var(--accent-secondary);
+        }
+        .achievement-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">AS</div>
+            <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#timeline">Timeline</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#achievements">Achievements</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+            </ul>
+            <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <h1>Inter-IIT Vital Extraction Challenge: Revolutionizing Healthcare with Computer Vision</h1>
+            <div class="meta">
+                <span><i class="far fa-calendar"></i> May 1, 2024</span>
+                <span><i class="far fa-folder"></i> AI & Computer Vision</span>
+            </div>
+            
+            <div class="achievement-badge">
+                <i class="fas fa-medal"></i>
+                Silver Medal - Inter-IIT Tech Meet 11.0
+            </div>
+            
+            <div class="content">
+                <img src="assest/vital-extraction-thumbnail.png" alt="Vital Extraction Challenge Project">
+                
+                <h2>Introduction</h2>
+                <p>The Inter-IIT Vital Extraction Challenge was a prestigious competition at the Inter-IIT Tech Meet 11.0, where teams were tasked with developing a computer vision model to extract vital signs from ECG monitor images. Our team from IIT Roorkee achieved remarkable success, securing a Silver Medal with a solution that achieved 93% accuracy.</p>
+
+                <h2>Problem Statement</h2>
+                <p>The challenge required participants to develop a system that could accurately extract vital signs from images of ECG monitors. This is a critical task in healthcare, as it enables the digitization of patient data from various medical devices, improving record-keeping and analysis.</p>
+
+                <h2>Technical Approach</h2>
+                <p>Our solution leveraged several advanced computer vision and deep learning techniques:</p>
+                <ul>
+                    <li><strong>YOLO-based Detection:</strong> Used for accurate localization of vital signs on the monitor</li>
+                    <li><strong>Data Augmentation:</strong> Implemented to enhance model robustness</li>
+                    <li><strong>Noise Reduction:</strong> Applied preprocessing techniques to improve image quality</li>
+                    <li><strong>Optimization:</strong> Achieved inference speed of 2.3 seconds on Google Colab CPU</li>
+                </ul>
+
+                <h2>Key Features</h2>
+                <ul>
+                    <li>High accuracy (93%) in vital sign extraction</li>
+                    <li>Robust performance across different monitor types</li>
+                    <li>Fast inference time suitable for real-time applications</li>
+                    <li>Minimal hardware requirements</li>
+                </ul>
+
+                <h2>Technical Implementation</h2>
+                <p>The project was implemented using:</p>
+                <ul>
+                    <li><strong>Python</strong> as the primary programming language</li>
+                    <li><strong>PyTorch</strong> for deep learning implementation</li>
+                    <li><strong>OpenCV</strong> for image processing</li>
+                    <li><strong>YOLO</strong> for object detection</li>
+                </ul>
+
+                <h2>Challenges and Solutions</h2>
+                <p>We faced several challenges during development:</p>
+                <ul>
+                    <li><strong>Image Quality:</strong> Addressed through advanced preprocessing techniques</li>
+                    <li><strong>Real-time Processing:</strong> Optimized model architecture for speed</li>
+                    <li><strong>Accuracy Requirements:</strong> Implemented ensemble methods and careful hyperparameter tuning</li>
+                </ul>
+
+                <h2>Results and Impact</h2>
+                <p>The project demonstrated significant achievements:</p>
+                <ul>
+                    <li>93% accuracy in vital sign extraction</li>
+                    <li>Silver Medal at Inter-IIT Tech Meet 11.0</li>
+                    <li>Potential for real-world healthcare applications</li>
+                    <li>Contribution to medical data digitization</li>
+                </ul>
+
+                <h2>Future Applications</h2>
+                <p>This technology has numerous potential applications in healthcare:</p>
+                <ul>
+                    <li>Automated patient monitoring systems</li>
+                    <li>Digital health record management</li>
+                    <li>Remote patient monitoring</li>
+                    <li>Medical research data collection</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>The Inter-IIT Vital Extraction Challenge was a significant milestone in our journey of applying AI to healthcare. Our solution not only achieved high accuracy but also demonstrated the practical potential of computer vision in medical applications. The success of this project highlights the importance of interdisciplinary approaches in solving real-world healthcare challenges.</p>
+
+                <a href="blog.html" class="back-to-blog">
+                    <i class="fas fa-arrow-left"></i> Back to Blog
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ashish Singh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
