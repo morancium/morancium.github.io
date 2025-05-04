@@ -25,20 +25,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('nav ul');
+    let isMenuOpen = false;
     
-    menuToggle.addEventListener('click', () => {
+    function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
         navMenu.classList.toggle('active');
-        menuToggle.innerHTML = navMenu.classList.contains('active') 
+        menuToggle.innerHTML = isMenuOpen 
             ? '<i class="fas fa-times"></i>' 
             : '<i class="fas fa-bars"></i>';
+    }
+    
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event from bubbling up
+        toggleMenu();
     });
 
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
-        if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-            navMenu.classList.remove('active');
-            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        if (isMenuOpen && !navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            toggleMenu();
         }
+    });
+
+    // Close mobile menu when clicking a nav link
+    document.querySelectorAll('nav ul li a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (isMenuOpen) {
+                toggleMenu();
+            }
+        });
     });
 
     // Smooth scrolling for navigation links
