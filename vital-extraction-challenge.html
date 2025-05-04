@@ -176,6 +176,18 @@
                     <li>Contribution to medical data digitization</li>
                 </ul>
 
+                <h2>Brownie Point Attempt: Heart Rate Curve Digitization</h2>
+                <p>As a stretch goal, the team attempted to digitize the heart rate waveform from the monitor images—an extra feature not required in the main task.</p>
+                
+                <h3>Approach:</h3>
+                <ul>
+                    <li><strong>Noise Detection & Removal:</strong> Trained a small YOLOv5s model to detect and eliminate noisy text near the graph.</li>
+                    <li><strong>Image Processing Techniques:</strong> Applied binarization and contour extraction to isolate the heart rate curve.</li>
+                    <li><strong>Signal Sampling:</strong> The cleaned curve was sampled column-wise to reconstruct a digital representation.</li>
+                </ul>
+                
+                <p>While this wasn't a core deliverable, it showcased the team's ability to extend the problem and explore creative solutions.</p>
+
                 <h2>Future Applications</h2>
                 <p>This technology has numerous potential applications in healthcare:</p>
                 <ul>
