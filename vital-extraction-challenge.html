@@ -71,6 +71,17 @@
             padding: 0.5rem 1rem;
             border-radius: 20px;
             margin: 1rem 0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .achievement-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: var(--accent-secondary);
+        }
+        .achievement-badge:active {
+            transform: translateY(0);
         }
         .github-link {
             color: var(--text-primary);
@@ -119,10 +130,10 @@
                 <a href="https://github.com/morancium/Inter-IIT-Vital-Extraction-Challenge-IIT-Roorkee" class="github-link" target="_blank"><i class="fab fa-github"></i></a>
             </div>
             
-            <div class="achievement-badge">
+            <a href="index.html#achievements" class="achievement-badge">
                 <i class="fas fa-medal"></i>
                 Silver Medal - Inter-IIT Tech Meet 11.0
-            </div>
+            </a>
             
             <div class="content">
                 <img src="assest/vital-extraction-thumbnail.png" alt="Vital Extraction Challenge Project">
