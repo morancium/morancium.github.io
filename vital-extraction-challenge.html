@@ -26,6 +26,7 @@
             gap: 1rem;
             margin-bottom: 2rem;
             color: var(--text-secondary);
+            align-items: center;
         }
         .blog-post .content {
             line-height: 1.8;
@@ -71,12 +72,30 @@
             border-radius: 20px;
             margin: 1rem 0;
         }
+        .github-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        .github-link:hover {
+            color: var(--accent-primary);
+        }
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .logo-link:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
     <header>
         <nav class="container">
-            <div class="logo">AS</div>
+            <a href="index.html" class="logo-link">
+                <div class="logo">AS</div>
+            </a>
             <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -97,6 +116,7 @@
             <div class="meta">
                 <span><i class="far fa-calendar"></i> May 1, 2024</span>
                 <span><i class="far fa-folder"></i> AI & Computer Vision</span>
+                <a href="https://github.com/morancium/Inter-IIT-Vital-Extraction-Challenge-IIT-Roorkee" class="github-link" target="_blank"><i class="fab fa-github"></i></a>
             </div>
             
             <div class="achievement-badge">

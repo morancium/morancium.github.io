@@ -984,4 +984,12 @@ nav ul li a.active {
     .blog-thumbnail {
         height: 180px;
     }
+}
+
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+}
+.logo-link:hover {
+    opacity: 0.8;
 } 
