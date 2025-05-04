@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open-Sourced RAG Pipeline - Ashish Singh</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .blog-post img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .blog-post h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-post .meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            align-items: center;
+        }
+        .blog-post .content {
+            line-height: 1.8;
+        }
+        .blog-post .content h2 {
+            margin: 2rem 0 1rem;
+            color: var(--accent-primary);
+        }
+        .blog-post .content p {
+            margin-bottom: 1.5rem;
+        }
+        .blog-post .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        .blog-post .content li {
+            margin-bottom: 0.5rem;
+        }
+        .blog-post .content code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+        .back-to-blog:hover {
+            color: var(--accent-secondary);
+        }
+        .github-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        .github-link:hover {
+            color: var(--accent-primary);
+        }
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .logo-link:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">AS</div>
+            </a>
+            <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#timeline">Timeline</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#achievements">Achievements</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+            </ul>
+            <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <h1>Open-Sourced RAG Pipeline: Revolutionizing Document Processing with Retrieval-Augmented Generation</h1>
+            <div class="meta">
+                <span><i class="far fa-calendar"></i> May 4, 2025</span>
+                <span><i class="far fa-folder"></i> AI & NLP</span>
+                <a href="https://github.com/morancium/open-sourced-RAG" class="github-link" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <div class="content">
+                <img src="assest/rag-thumbnail.png" alt="Open-Sourced RAG Pipeline">
+                
+                <h2>Introduction</h2>
+                <p>In the rapidly evolving landscape of Natural Language Processing (NLP), Retrieval-Augmented Generation (RAG) has emerged as a powerful paradigm for enhancing language models' capabilities. Today, I'm excited to introduce our open-sourced RAG pipeline, a comprehensive solution designed to transform document processing workflows across various industries.</p>
+
+                <h2>What is RAG?</h2>
+                <p>Retrieval-Augmented Generation combines the power of large language models with external knowledge retrieval. Unlike traditional language models that rely solely on their pre-trained knowledge, RAG systems can access and incorporate up-to-date information from external sources, making them more accurate and contextually aware.</p>
+
+                <h2>Understanding the RAG Pipeline</h2>
+                <p>The RAG pipeline consists of several key processes that work together to provide accurate and contextually relevant responses:</p>
+
+                <h3>1. Document Processing and Chunking</h3>
+                <p>Chunking is the process of breaking down large documents into smaller, manageable pieces while preserving their semantic meaning. Our pipeline uses several strategies:</p>
+                <ul>
+                    <li><strong>Semantic Chunking:</strong> Splits text based on semantic boundaries (paragraphs, sections) rather than fixed character counts</li>
+                    <li><strong>Overlap Strategy:</strong> Maintains context by allowing chunks to overlap slightly, preventing information loss at boundaries</li>
+                    <li><strong>Smart Chunking:</strong> Uses LangChain's text splitters to maintain document structure and relationships</li>
+                </ul>
+
+                <h3>2. Vector Embedding and Storage</h3>
+                <p>Once documents are chunked, they are converted into vector embeddings:</p>
+                <ul>
+                    <li><strong>Embedding Generation:</strong> Uses state-of-the-art embedding models to convert text into high-dimensional vectors</li>
+                    <li><strong>Vector Storage:</strong> Stores these embeddings in ChromaDB with metadata for efficient retrieval</li>
+                    <li><strong>Upserting:</strong> A combination of "update" and "insert" operations that:
+                        <ul>
+                            <li>Updates existing vectors if the document has changed</li>
+                            <li>Inserts new vectors for new content</li>
+                            <li>Maintains document versioning and history</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>3. Retrieval Process</h3>
+                <p>The retrieval process is optimized for both speed and relevance:</p>
+                <ul>
+                    <li><strong>Query Processing:</strong>
+                        <ul>
+                            <li>Converts user queries into vector embeddings</li>
+                            <li>Applies query expansion techniques for better context understanding</li>
+                            <li>Handles complex queries with multiple components</li>
+                        </ul>
+                    </li>
+                    <li><strong>Similarity Search:</strong>
+                        <ul>
+                            <li>Uses cosine similarity to find the most relevant document chunks</li>
+                            <li>Implements approximate nearest neighbor (ANN) search for efficiency</li>
+                            <li>Applies filtering based on metadata and document types</li>
+                        </ul>
+                    </li>
+                    <li><strong>Re-ranking:</strong>
+                        <ul>
+                            <li>Re-ranks retrieved chunks based on relevance to the query</li>
+                            <li>Considers document freshness and importance</li>
+                            <li>Applies diversity sampling to avoid redundant information</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>4. Generation Process</h3>
+                <p>The final step combines retrieved information with language model generation:</p>
+                <ul>
+                    <li><strong>Context Integration:</strong>
+                        <ul>
+                            <li>Combines relevant chunks into a coherent context</li>
+                            <li>Maintains proper context window limits</li>
+                            <li>Handles multiple document sources</li>
+                        </ul>
+                    </li>
+                    <li><strong>Prompt Engineering:</strong>
+                        <ul>
+                            <li>Structures the prompt to include retrieved context</li>
+                            <li>Uses system messages to guide model behavior</li>
+                            <li>Implements few-shot examples for better performance</li>
+                        </ul>
+                    </li>
+                    <li><strong>Response Generation:</strong>
+                        <ul>
+                            <li>Uses the language model to generate responses</li>
+                            <li>Ensures responses are grounded in retrieved information</li>
+                            <li>Maintains coherence and relevance</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h2>Key Components</h2>
+                <ul>
+                    <li><strong>Document Processing Layer:</strong> Handles multiple document formats including PDFs, images, and text files</li>
+                    <li><strong>Vector Storage System:</strong> Uses ChromaDB for efficient vector storage and retrieval</li>
+                    <li><strong>Language Model Integration:</strong> Supports multiple state-of-the-art models</li>
+                    <li><strong>Text Processing Pipeline:</strong> Powered by LangChain for sophisticated text handling</li>
+                </ul>
+
+                <h2>Technical Implementation</h2>
+                <p>The pipeline is built using several key technologies:</p>
+                <ul>
+                    <li><strong>Python 3.8+</strong> as the primary programming language</li>
+                    <li><strong>Transformers</strong> and <strong>AutoGPTQ</strong> for language model inference</li>
+                    <li><strong>ChromaDB</strong> for vector storage and retrieval</li>
+                    <li><strong>LangChain</strong> for text processing and chunking</li>
+                </ul>
+
+                <h2>System Architecture</h2>
+                <p>The pipeline consists of three main components:</p>
+                <ul>
+                    <li><strong>Document Processing:</strong>
+                        <ul>
+                            <li>OCR capabilities for image processing</li>
+                            <li>PDF text extraction and processing</li>
+                            <li>Text file handling</li>
+                        </ul>
+                    </li>
+                    <li><strong>Vector Storage:</strong>
+                        <ul>
+                            <li>ChromaDB integration</li>
+                            <li>Cosine similarity-based retrieval</li>
+                            <li>Metadata management</li>
+                        </ul>
+                    </li>
+                    <li><strong>Model Integration:</strong>
+                        <ul>
+                            <li>Support for multiple model architectures</li>
+                            <li>Optimized inference using AutoGPTQ</li>
+                            <li>Context window management</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h2>Usage Example</h2>
+                <p>Here's how to use the pipeline:</p>
+                <pre><code>python rag_pipeline.py -s document.pdf -q "What are the key responsibilities mentioned in this document?"</code></pre>
+
+                <h2>Technical Requirements</h2>
+                <p>The system requires:</p>
+                <ul>
+                    <li>Minimum 16GB RAM (32GB recommended)</li>
+                    <li>CUDA-compatible GPU for model inference</li>
+                    <li>Sufficient disk space for model storage</li>
+                </ul>
+
+                <h2>Future Developments</h2>
+                <p>We're actively working on several enhancements:</p>
+                <ul>
+                    <li>Support for additional document formats</li>
+                    <li>Improved retrieval algorithms</li>
+                    <li>Enhanced model fine-tuning capabilities</li>
+                    <li>Better memory management for large documents</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>Our open-sourced RAG pipeline represents a significant step forward in document processing and information retrieval. By combining state-of-the-art language models with efficient vector storage and retrieval mechanisms, we've created a powerful tool that can transform how organizations process and extract insights from their documents.</p>
+
+                <p>We invite the community to contribute to this project and help shape its future development. Whether you're interested in improving the core functionality, adding new features, or optimizing performance, your contributions are welcome!</p>
+
+                <a href="blog.html" class="back-to-blog">
+                    <i class="fas fa-arrow-left"></i> Back to Blog
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ashish Singh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
