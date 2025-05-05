@@ -78,6 +78,29 @@
         .logo-link:hover {
             opacity: 0.8;
         }
+        /* Add code block styling */
+        pre {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 1.5rem 0;
+            font-family: monospace;
+            line-height: 1.5;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            pre {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -113,7 +136,7 @@
                 <img src="assest/rag-thumbnail.png" alt="Open-Sourced RAG Pipeline">
                 
                 <h2>Introduction</h2>
-                <p>In the rapidly evolving landscape of Natural Language Processing (NLP), Retrieval-Augmented Generation (RAG) has emerged as a powerful paradigm for enhancing language models' capabilities. Today, I'm excited to introduce our open-sourced RAG pipeline, a comprehensive solution designed to transform document processing workflows across various industries.</p>
+                <p>In the rapidly evolving landscape of Natural Language Processing (NLP), Retrieval-Augmented Generation (RAG) has emerged as a powerful paradigm for enhancing language models' capabilities. This article introduces an open-sourced RAG pipeline, a comprehensive solution designed to transform document processing workflows across various industries.</p>
 
                 <h2>What is RAG?</h2>
                 <p>Retrieval-Augmented Generation combines the power of large language models with external knowledge retrieval. Unlike traditional language models that rely solely on their pre-trained knowledge, RAG systems can access and incorporate up-to-date information from external sources, making them more accurate and contextually aware.</p>
@@ -122,23 +145,23 @@
                 <p>The RAG pipeline consists of several key processes that work together to provide accurate and contextually relevant responses:</p>
 
                 <h3>1. Document Processing and Chunking</h3>
-                <p>Chunking is the process of breaking down large documents into smaller, manageable pieces while preserving their semantic meaning. Our pipeline uses several strategies:</p>
+                <p>Chunking is the process of breaking down large documents into smaller, manageable pieces while preserving their semantic meaning. The pipeline implements several strategies:</p>
                 <ul>
-                    <li><strong>Semantic Chunking:</strong> Splits text based on semantic boundaries (paragraphs, sections) rather than fixed character counts</li>
-                    <li><strong>Overlap Strategy:</strong> Maintains context by allowing chunks to overlap slightly, preventing information loss at boundaries</li>
-                    <li><strong>Smart Chunking:</strong> Uses LangChain's text splitters to maintain document structure and relationships</li>
+                    <li><strong>Semantic Chunking:</strong> Text is split based on semantic boundaries (paragraphs, sections) rather than fixed character counts</li>
+                    <li><strong>Overlap Strategy:</strong> Context is maintained by allowing chunks to overlap slightly, preventing information loss at boundaries</li>
+                    <li><strong>Smart Chunking:</strong> LangChain's text splitters are used to maintain document structure and relationships</li>
                 </ul>
 
                 <h3>2. Vector Embedding and Storage</h3>
                 <p>Once documents are chunked, they are converted into vector embeddings:</p>
                 <ul>
-                    <li><strong>Embedding Generation:</strong> Uses state-of-the-art embedding models to convert text into high-dimensional vectors</li>
-                    <li><strong>Vector Storage:</strong> Stores these embeddings in ChromaDB with metadata for efficient retrieval</li>
+                    <li><strong>Embedding Generation:</strong> State-of-the-art embedding models convert text into high-dimensional vectors</li>
+                    <li><strong>Vector Storage:</strong> These embeddings are stored in ChromaDB with metadata for efficient retrieval</li>
                     <li><strong>Upserting:</strong> A combination of "update" and "insert" operations that:
                         <ul>
-                            <li>Updates existing vectors if the document has changed</li>
-                            <li>Inserts new vectors for new content</li>
-                            <li>Maintains document versioning and history</li>
+                            <li>Update existing vectors if the document has changed</li>
+                            <li>Insert new vectors for new content</li>
+                            <li>Maintain document versioning and history</li>
                         </ul>
                     </li>
                 </ul>
@@ -148,23 +171,23 @@
                 <ul>
                     <li><strong>Query Processing:</strong>
                         <ul>
-                            <li>Converts user queries into vector embeddings</li>
-                            <li>Applies query expansion techniques for better context understanding</li>
-                            <li>Handles complex queries with multiple components</li>
+                            <li>User queries are converted into vector embeddings</li>
+                            <li>Query expansion techniques are applied for better context understanding</li>
+                            <li>Complex queries with multiple components are handled</li>
                         </ul>
                     </li>
                     <li><strong>Similarity Search:</strong>
                         <ul>
-                            <li>Uses cosine similarity to find the most relevant document chunks</li>
-                            <li>Implements approximate nearest neighbor (ANN) search for efficiency</li>
-                            <li>Applies filtering based on metadata and document types</li>
+                            <li>Cosine similarity is used to find the most relevant document chunks</li>
+                            <li>Approximate nearest neighbor (ANN) search is implemented for efficiency</li>
+                            <li>Filtering is applied based on metadata and document types</li>
                         </ul>
                     </li>
                     <li><strong>Re-ranking:</strong>
                         <ul>
-                            <li>Re-ranks retrieved chunks based on relevance to the query</li>
-                            <li>Considers document freshness and importance</li>
-                            <li>Applies diversity sampling to avoid redundant information</li>
+                            <li>Retrieved chunks are re-ranked based on relevance to the query</li>
+                            <li>Document freshness and importance are considered</li>
+                            <li>Diversity sampling is applied to avoid redundant information</li>
                         </ul>
                     </li>
                 </ul>
@@ -174,33 +197,33 @@
                 <ul>
                     <li><strong>Context Integration:</strong>
                         <ul>
-                            <li>Combines relevant chunks into a coherent context</li>
-                            <li>Maintains proper context window limits</li>
-                            <li>Handles multiple document sources</li>
+                            <li>Relevant chunks are combined into a coherent context</li>
+                            <li>Proper context window limits are maintained</li>
+                            <li>Multiple document sources are handled</li>
                         </ul>
                     </li>
                     <li><strong>Prompt Engineering:</strong>
                         <ul>
-                            <li>Structures the prompt to include retrieved context</li>
-                            <li>Uses system messages to guide model behavior</li>
-                            <li>Implements few-shot examples for better performance</li>
+                            <li>The prompt is structured to include retrieved context</li>
+                            <li>System messages guide model behavior</li>
+                            <li>Few-shot examples are implemented for better performance</li>
                         </ul>
                     </li>
                     <li><strong>Response Generation:</strong>
                         <ul>
-                            <li>Uses the language model to generate responses</li>
-                            <li>Ensures responses are grounded in retrieved information</li>
-                            <li>Maintains coherence and relevance</li>
+                            <li>The language model generates responses</li>
+                            <li>Responses are grounded in retrieved information</li>
+                            <li>Coherence and relevance are maintained</li>
                         </ul>
                     </li>
                 </ul>
 
                 <h2>Key Components</h2>
                 <ul>
-                    <li><strong>Document Processing Layer:</strong> Handles multiple document formats including PDFs, images, and text files</li>
-                    <li><strong>Vector Storage System:</strong> Uses ChromaDB for efficient vector storage and retrieval</li>
-                    <li><strong>Language Model Integration:</strong> Supports multiple state-of-the-art models</li>
-                    <li><strong>Text Processing Pipeline:</strong> Powered by LangChain for sophisticated text handling</li>
+                    <li><strong>Document Processing Layer:</strong> Multiple document formats including PDFs, images, and text files are handled</li>
+                    <li><strong>Vector Storage System:</strong> ChromaDB is used for efficient vector storage and retrieval</li>
+                    <li><strong>Language Model Integration:</strong> Multiple state-of-the-art models are supported</li>
+                    <li><strong>Text Processing Pipeline:</strong> LangChain powers sophisticated text handling</li>
                 </ul>
 
                 <h2>Technical Implementation</h2>
@@ -210,6 +233,15 @@
                     <li><strong>Transformers</strong> and <strong>AutoGPTQ</strong> for language model inference</li>
                     <li><strong>ChromaDB</strong> for vector storage and retrieval</li>
                     <li><strong>LangChain</strong> for text processing and chunking</li>
+                </ul>
+
+                <h2>Supported Models</h2>
+                <p>The pipeline supports several state-of-the-art language models:</p>
+                <ul>
+                    <li>OpenChat 3.5</li>
+                    <li>Mixtral 8x7B</li>
+                    <li>Vicuna 13B v1.5 16K</li>
+                    <li>Zephyr 7B Beta</li>
                 </ul>
 
                 <h2>System Architecture</h2>
@@ -251,7 +283,7 @@
                 </ul>
 
                 <h2>Future Developments</h2>
-                <p>We're actively working on several enhancements:</p>
+                <p>Active development is focused on several enhancements:</p>
                 <ul>
                     <li>Support for additional document formats</li>
                     <li>Improved retrieval algorithms</li>
@@ -260,9 +292,9 @@
                 </ul>
 
                 <h2>Conclusion</h2>
-                <p>Our open-sourced RAG pipeline represents a significant step forward in document processing and information retrieval. By combining state-of-the-art language models with efficient vector storage and retrieval mechanisms, we've created a powerful tool that can transform how organizations process and extract insights from their documents.</p>
+                <p>This open-sourced RAG pipeline represents a significant step forward in document processing and information retrieval. By combining state-of-the-art language models with efficient vector storage and retrieval mechanisms, it provides a powerful tool that can transform how organizations process and extract insights from their documents.</p>
 
-                <p>We invite the community to contribute to this project and help shape its future development. Whether you're interested in improving the core functionality, adding new features, or optimizing performance, your contributions are welcome!</p>
+                <p>Contributions to this project are welcome. Whether you're interested in improving the core functionality, adding new features, or optimizing performance, your participation is encouraged.</p>
 
                 <a href="blog.html" class="back-to-blog">
                     <i class="fas fa-arrow-left"></i> Back to Blog
