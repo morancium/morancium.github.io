@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bringing Color to Black and White Images with Deep Learning - Ashish Singh</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Prism.js CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .blog-post img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .blog-post h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-post .meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            align-items: center;
+        }
+        .blog-post .content {
+            line-height: 1.8;
+        }
+        .blog-post .content h2 {
+            margin: 2rem 0 1rem;
+            color: var(--accent-primary);
+        }
+        .blog-post .content p {
+            margin-bottom: 1.5rem;
+        }
+        .blog-post .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        .blog-post .content li {
+            margin-bottom: 0.5rem;
+        }
+        .blog-post .content code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+        .back-to-blog:hover {
+            color: var(--accent-secondary);
+        }
+        .github-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        .github-link:hover {
+            color: var(--accent-primary);
+        }
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        .logo-link:hover {
+            opacity: 0.8;
+        }
+        pre {
+            background: #f8f9fa !important;
+            padding: 1rem;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 1.5rem 0;
+            font-family: monospace;
+            line-height: 1.5;
+        }
+        pre code {
+            background: #f8f9fa !important;
+            padding: 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            pre {
+                font-size: 1rem;
+            }
+        }
+        .blog-post .content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+            counter-reset: item;
+            list-style-type: none;
+        }
+        .blog-post .content ol > li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .blog-post .content ol > li:before {
+            content: counter(item) ".";
+            counter-increment: item;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: var(--accent-primary);
+        }
+        .blog-post .content ol ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            list-style-type: disc;
+        }
+        .blog-post .content ol ul li {
+            margin-bottom: 0.25rem;
+        }
+        .blog-post .content ol ul li:before {
+            content: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">AS</div>
+            </a>
+            <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#timeline">Timeline</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#achievements">Achievements</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+            </ul>
+            <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <h1>Bringing Color to Black and White Images with Deep Learning</h1>
+            <div class="meta">
+                <span><i class="far fa-calendar"></i> May 5, 2025</span>
+                <span><i class="far fa-folder"></i> AI & Machine Learning</span>
+                <a href="https://github.com/morancium/Image_Colorization" class="github-link" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <div class="content">
+                <img src="assest/colorization-thumbnail.png" alt="Image Colorization Example">
+                
+                <h2>Introduction</h2>
+                <p>In the realm of computer vision, few tasks capture the imagination quite like image colorization—transforming grayscale photographs into vibrant, full-color images. What was once a painstaking manual process performed by skilled artists can now be automated using deep learning techniques. In this article, I'll walk through my implementation of a conditional GAN-based image colorization system that breathes new life into black and white imagery.</p>
+
+                <h2>The Challenge of Colorization</h2>
+                <p>Colorizing black and white images isn't merely about adding colors—it's about adding the *right* colors in a way that appears natural and consistent. This presents several unique challenges:</p>
+                <ol>
+                    <li><strong>Ambiguity:</strong> Many objects can have multiple plausible color schemes. A car could be red, blue, or any other color.</li>
+                    <li><strong>Context sensitivity:</strong> The correct color often depends on surrounding elements and global context.</li>
+                    <li><strong>Semantic understanding:</strong> Effective colorization requires recognizing objects and understanding what colors they typically have.</li>
+                </ol>
+                <p>Traditional approaches often involve extensive handcrafted features and rules. Deep learning offers a more elegant solution by learning these complex relationships directly from data.</p>
+
+                <h2>Leveraging Conditional GANs</h2>
+                <p>My approach uses a conditional Generative Adversarial Network (cGAN), specifically inspired by the Pix2Pix architecture. GANs consist of two networks engaged in a minimax game:</p>
+                <ul>
+                    <li>A <strong>generator</strong> that tries to create realistic colored images</li>
+                    <li>A <strong>discriminator</strong> that tries to distinguish between real and generated images</li>
+                </ul>
+                <p>The "conditional" aspect means our generator doesn't create images from random noise alone but is conditioned on input grayscale images. This provides crucial structural information for the colorization process.</p>
+
+                <h2>The Technical Architecture</h2>
+                <h3>Color Space Transformation</h3>
+                <p>Rather than working directly with RGB values, the model operates in the L*a*b* color space, which separates lightness (L*) from color information (a* and b*). This approach has several advantages:</p>
+                <pre><code class="language-python"># Converting RGB to L*a*b*
+img_lab = rgb2lab(img_file).astype("float32")
+L = img_lab[[0], ...] / 50.0 - 1.0  # Between -1 and 1
+ab = img_lab[[1, 2], ...] / 110.0  # Between -1 and 1</code></pre>
+                <p>The model uses the L channel (grayscale intensity) as input and predicts the a* and b* channels. This separation allows the network to focus solely on adding color without modifying the underlying structure.</p>
+
+                <h3>Generator Architecture</h3>
+                <p>The generator follows a U-Net architecture with skip connections, which is crucial for preserving spatial details:</p>
+                <img src="assest/u-net-architecture.png" alt="U-Net Architecture Diagram">
+                <p>The U-Net consists of:</p>
+                <ul>
+                    <li>An encoder path that downsamples the image, capturing increasingly abstract features</li>
+                    <li>A decoder path that upsamples back to the original resolution</li>
+                    <li>Skip connections that allow fine details to flow directly from encoder to decoder</li>
+                </ul>
+                <p>I implemented two variants:</p>
+                <ol>
+                    <li>A custom U-Net built from scratch</li>
+                    <li>A ResNet18-based U-Net leveraging transfer learning</li>
+                </ol>
+                <p>The ResNet-based approach showed superior performance, as it benefits from pretrained weights that already understand image structures.</p>
+
+                <h3>Discriminator Design</h3>
+                <p>The discriminator uses a PatchGAN architecture, which classifies whether each N×N patch in an image is real or fake:</p>
+                <pre><code class="language-python">class PatchDiscriminator(nn.Module):
+    def __init__(self, in_channels=3, features=[64, 128, 256, 512]):
+        # Implementation details...</code></pre>
+                <p>This patch-based approach is particularly effective for texture and color patterns, as it focuses on local coherence rather than global structure.</p>
+
+                <h2>Training Methodology</h2>
+                <h3>Loss Function</h3>
+                <p>The training uses a hybrid loss function combining:</p>
+                <ol>
+                    <li><strong>Adversarial loss:</strong> The standard GAN objective that pushes the generator to create realistic colorizations</li>
+                    <li><strong>L1 loss:</strong> Direct pixel-wise difference between predicted and ground truth colors</li>
+                </ol>
+                <pre><code class="language-python"># Generator loss
+G_fake_loss = bce(D_fake, torch.ones_like(D_fake))
+L1_loss = L1(fake_color, ab) * config.L1_LAMBDA
+G_loss = G_fake_loss + L1_loss</code></pre>
+                <p>The L1 component (weighted by λ=100) ensures color accuracy, while the adversarial component encourages perceptual realism.</p>
+
+                <h3>Two-Phase Training</h3>
+                <p>For best results, I implemented a two-phase training approach:</p>
+                <ol>
+                    <li><strong>Pretraining phase:</strong> The generator is trained on the L1 loss alone to establish basic colorization capabilities</li>
+                    <li><strong>Adversarial phase:</strong> The full GAN is trained with both generator and discriminator updating in alternating steps</li>
+                </ol>
+                <p>This approach helps stabilize training and prevent mode collapse—a common issue in GAN training where the generator produces limited varieties of outputs.</p>
+
+                <h2>Results and Evaluation</h2>
+                <p>The results demonstrate impressive colorization abilities, especially for natural scenes and common objects. Here are some examples:</p>
+                <img src="assest/colorization-result.png" alt="Colorization Results">
+                <p>I evaluated the model on the COCO dataset validation split. The model excels at:</p>
+                <ul>
+                    <li>Natural landscapes (sky, vegetation, water)</li>
+                    <li>Common objects with predictable colors</li>
+                    <li>General scene colorization</li>
+                </ul>
+                <p>It struggles more with:</p>
+                <ul>
+                    <li>Objects that have highly variable colors</li>
+                    <li>Unusual lighting conditions</li>
+                    <li>Fine details in complex scenes</li>
+                </ul>
+
+                <h2>Key Insights and Lessons</h2>
+                <p>Through developing this project, I gained several valuable insights:</p>
+                <ol>
+                    <li><strong>Data preprocessing matters:</strong> Normalizing input/output ranges and working in L*a*b* space significantly improves results.</li>
+                    <li><strong>Loss function balance is critical:</strong> The λ weighting between adversarial and L1 losses greatly affects the output style—higher L1 weights produce more conservative but accurate colors.</li>
+                    <li><strong>Architecture choices have tradeoffs:</strong>
+                        <ul>
+                            <li>Custom U-Net: More flexible, slower convergence</li>
+                            <li>ResNet-based: Faster convergence, better semantic understanding</li>
+                        </ul>
+                    </li>
+                    <li><strong>Visualization during training</strong> is essential for diagnosing issues and understanding model behavior.</li>
+                </ol>
+
+                <h2>Implementation Details</h2>
+                <p>The implementation uses PyTorch with mixed precision training for efficiency:</p>
+                <pre><code class="language-python">with torch.cuda.amp.autocast():
+    fake_color = gen(Ls)
+    fake_image = torch.cat([Ls, fake_color], dim=1)
+    # More training code...</code></pre>
+                <p>This allows the model to train effectively even on consumer-grade GPUs with 8-12GB of VRAM.</p>
+
+                <h2>Future Improvements</h2>
+                <p>While the current implementation produces impressive results, several enhancements could push performance further:</p>
+                <ol>
+                    <li><strong>User hints:</strong> Allowing users to provide color hints for specific regions</li>
+                    <li><strong>Class conditioning:</strong> Incorporating semantic information to improve color accuracy</li>
+                    <li><strong>Attention mechanisms:</strong> Adding attention to help the model focus on relevant contextual information</li>
+                </ol>
+
+                <h2>Conclusion</h2>
+                <p>Deep learning-based image colorization represents a fascinating intersection of computer vision, machine learning, and art. The conditional GAN approach demonstrates how we can teach machines to perform tasks that once required significant human artistic judgment.</p>
+                <p>By leveraging modern architectures like U-Net and PatchGAN, along with carefully designed loss functions and training strategies, we can create systems that bring the past to life through colorization. The techniques explored in this project extend beyond colorization alone and can be applied to various image-to-image translation tasks.</p>
+
+                <p><em>The complete implementation is available on <a href="https://github.com/morancium/Image_Colorization">GitHub</a> with detailed documentation and examples.</em></p>
+
+                <a href="blog.html" class="back-to-blog">
+                    <i class="fas fa-arrow-left"></i> Back to Blog
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Ashish Singh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- Prism.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Prism.highlightAll();
+        });
+    </script>
+</body>
+</html> 
