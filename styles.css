@@ -992,4 +992,42 @@ nav ul li a.active {
 }
 .logo-link:hover {
     opacity: 0.8;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.blog-content-link {
+    display: block;
+    color: inherit;
+}
+
+.blog-content-link:hover {
+    text-decoration: none;
+}
+
+.blog-link {
+    display: block;
+    color: inherit;
+}
+
+.blog-link:hover {
+    text-decoration: none;
+}
+
+.read-more {
+    text-decoration: none;
+}
+
+.read-more:hover {
+    text-decoration: none;
+}
+
+.github-link {
+    text-decoration: none;
+}
+
+.github-link:hover {
+    text-decoration: none;
 } 
