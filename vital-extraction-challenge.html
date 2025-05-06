@@ -137,81 +137,199 @@
             
             <div class="content">
                 <img src="assest/vital-extraction-thumbnail.png" alt="Vital Extraction Challenge Project">
-                
-                <h2>Introduction</h2>
-                <p>The Inter-IIT Vital Extraction Challenge was a prestigious competition at the Inter-IIT Tech Meet 11.0, where teams were tasked with developing a computer vision model to extract vital signs from ECG monitor images. Our team from IIT Roorkee achieved remarkable success, securing a Silver Medal with a solution that achieved 93% accuracy.</p>
 
-                <h2>Problem Statement</h2>
-                <p>The challenge required participants to develop a system that could accurately extract vital signs from images of ECG monitors. This is a critical task in healthcare, as it enables the digitization of patient data from various medical devices, improving record-keeping and analysis.</p>
+                <h2>Introduction:</h2>
+                <p>Monitoring vitals is an important aspect of providing high-quality care to patients. With the increasing use of technology in healthcare, there are now many digital monitoring systems available that can help to automate the process of tracking vitals, making it more efficient and accurate.</p>
 
-                <h2>Technical Approach</h2>
-                <p>Our solution leveraged several advanced computer vision and deep learning techniques:</p>
+                <p>This challenge is aimed at extracting a patient's vitals like SpO2, RR, Systolic Blood Pressure, Diastolic Blood Pressure and MAP from the provided ECG monitor images. We have dealt with this problem in a sequence of three separate subproblems - extracting the screen from the initial image, performing object detection and recognising the text to obtain vitals. We have employed state of the art models, data augmentation techniques, noise reduction models on images, supervised and semi-supervised learning on the data given to obtain a fast and accurate network that takes in an image and outputs the patient's vitals.</p>
+
+                <h2>Approach:</h2>
+                <p>We have attempted to solve this problem statement by dividing the core task into several sub tasks and targeting each part as a standalone problem. Our baseline model consists of the following steps :</p>
+
                 <ul>
-                    <li><strong>YOLO-based Detection:</strong> Used for accurate localization of vital signs on the monitor</li>
-                    <li><strong>Data Augmentation:</strong> Implemented to enhance model robustness</li>
-                    <li><strong>Noise Reduction:</strong> Applied preprocessing techniques to improve image quality</li>
-                    <li><strong>Optimization:</strong> Achieved inference speed of 2.3 seconds on Google Colab CPU</li>
+                    <li><strong>Screen Extraction</strong> - Extracting only the relevant part of the image i.e the monitor. We experimented with several techniques and finally settled with YOLOv5m6.</li>
+                    <li><strong>Object Detection to extract vitals</strong> - After experimenting with several architectures we used YOLOv5m6 to identify which number on the screen corresponded to which vital.</li>
+                    <li><strong>Character Recognition to obtain measurements</strong> - With the help of Optical Character Recognition(OCR), we read the text contained within the bounding boxes given as output by YOLO.</li>
                 </ul>
 
-                <h2>Key Features</h2>
+                <p>The above 3 steps lay down the most basic approach we had. Along with this we have later <strong>mentioned our approach for detecting the H.R graph</strong> and digitizing it.</p>
+
+                <h2>Dataset :</h2>
+                <p>The dataset we obtained was in three parts:</p>
+
                 <ul>
-                    <li>High accuracy (93%) in vital sign extraction</li>
-                    <li>Robust performance across different monitor types</li>
-                    <li>Fast inference time suitable for real-time applications</li>
-                    <li>Minimal hardware requirements</li>
+                    <li><strong>Monitor Segmentation Dataset</strong> - The dataset consists of 2000 images having the segmentation boundaries for the monitors in each image .</li>
+                    <li><strong>Classification Dataset</strong> - The second dataset consists of a 1000 monitor images with each monitor belonging to one of the four classes present.</li>
+                    <li><strong>Unlabelled Dataset</strong> - The third dataset consists of 7000 unlabelled images with monitors from several different types of classes.</li>
                 </ul>
 
-                <h2>Technical Implementation</h2>
-                <p>The project was implemented using:</p>
+                <h2>Baseline Model :</h2>
+                <p>We train a baseline model to extract the measurements relating to each vital from the monitor image. Our <strong>baseline model</strong> consists of:</p>
+
                 <ul>
-                    <li><strong>Python</strong> as the primary programming language</li>
-                    <li><strong>PyTorch</strong> for deep learning implementation</li>
-                    <li><strong>OpenCV</strong> for image processing</li>
-                    <li><strong>YOLO</strong> for object detection</li>
+                    <li>A <strong>ResNet-18</strong> based regressor to obtain the coordinates of the monitors' corners (i.e. to generate a bounding box)</li>
+                    <li>Followed by <strong>ResNet-18</strong> to perform classification and determine the monitor type.</li>
+                    <li>This is followed by object detection using <strong>YOLOv5m6</strong> to create bounding boxes around the different vital measurements like Heart Rate, SpO2, RR, MAP etc.</li>
+                    <li>Finally <strong>Paddle-Paddle OCR</strong> reads the text inside the bounding boxes generated by YOLO and gives the final output.</li>
                 </ul>
 
-                <h2>Challenges and Solutions</h2>
-                <p>We faced several challenges during development:</p>
+                <h2>Improvements on the Baseline:</h2>
+                <p>We undertook thorough literature reviews and conducted several experiments on our initial baseline by eliminating and adding parts,trying out different models for the subtasks and performing semi-supervised learning. Finally we settled on the following architecture as it gave the best performance.</p>
+
+                <h2>Final architecture:</h2>
                 <ul>
-                    <li><strong>Image Quality:</strong> Addressed through advanced preprocessing techniques</li>
-                    <li><strong>Real-time Processing:</strong> Optimized model architecture for speed</li>
-                    <li><strong>Accuracy Requirements:</strong> Implemented ensemble methods and careful hyperparameter tuning</li>
+                    <li>Screen Extraction via YOLOv5m6</li>
+                    <li>Vital Sign extraction using YOLOv5m6</li>
+                    <li>Text recognition using Paddle-Paddle OCR.</li>
                 </ul>
 
-                <h2>Results and Impact</h2>
-                <p>The project demonstrated significant achievements:</p>
+                <h2>Why did we omit classification?</h2>
+                <p>Since the labeled data given to us was classified into 4 types, we naturally thought of using a CNN based classifier like ResNet to determine the image type and then training a separate YOLO network on each type for higher accuracy. However, since YOLO learns contextual information, it was able to detect the correct vitals irrespective of the monitor type and removal of the classifier lead to a significant decrease in latency while not affecting the accuracy negatively in any way.</p>
+
+                <h2>Pipeline :</h2>
+                <img src="assest/VEC_flowchart.png" alt="Pipeline">
+
+                <h2>Screen Extraction:</h2>
                 <ul>
-                    <li>93% accuracy in vital sign extraction</li>
-                    <li>Silver Medal at Inter-IIT Tech Meet 11.0</li>
-                    <li>Potential for real-world healthcare applications</li>
-                    <li>Contribution to medical data digitization</li>
+                    <li>Our first approach to solve this problem was using ResNet-50 to predict the 4 corner points of the quadrilateral tracing the monitor by regression. However, the results were highly inaccurate on unseen data which led us to try out Instance Segmentation of the image by using Mask-RCNN.</li>
+                    <li>Mask-RCNN outputs a bounding box around the monitor along with a pixel by pixel mask. The results after performing semi-supervised learning on the given data were highly accurate. The main issue we faced was an unusually high inference time per image(9 seconds when using Google Colab-CPU).</li>
+                    <li><strong>YOLO</strong> is extremely fast because it does not deal with complex pipelines. It sees the entire image during training and test time so it implicitly encodes contextual information about classes as well as their appearance. Thus we performed training with YOLOv5m6 and got highly accurate results with a significant improvement in the inference time - <strong>0.6 seconds approximately per image</strong> , 1500% faster than Mask-RCNN.</li>
+                    <li>We use <strong>YOLOv5 – YOLOv5m6</strong> pretrained on the COCO dataset.</li>
                 </ul>
 
-                <h2>Brownie Point Attempt: Heart Rate Curve Digitization</h2>
-                <p>As a stretch goal, the team attempted to digitize the heart rate waveform from the monitor images—an extra feature not required in the main task.</p>
-                
-                <h3>Approach:</h3>
+                <p>For improving accuracy and a more robust screen extraction, we employ <strong>data augmentations</strong> to learn the given images better.</p>
                 <ul>
-                    <li><strong>Noise Detection & Removal:</strong> Trained a small YOLOv5s model to detect and eliminate noisy text near the graph.</li>
-                    <li><strong>Image Processing Techniques:</strong> Applied binarization and contour extraction to isolate the heart rate curve.</li>
-                    <li><strong>Signal Sampling:</strong> The cleaned curve was sampled column-wise to reconstruct a digital representation.</li>
-                </ul>
-                
-                <p>While this wasn't a core deliverable, it showcased the team's ability to extend the problem and explore creative solutions.</p>
-
-                <h2>Future Applications</h2>
-                <p>This technology has numerous potential applications in healthcare:</p>
-                <ul>
-                    <li>Automated patient monitoring systems</li>
-                    <li>Digital health record management</li>
-                    <li>Remote patient monitoring</li>
-                    <li>Medical research data collection</li>
+                    <li>We use vertical and horizontal flipping of the images</li>
+                    <li>Changing the image saturation(between -25% and 25%).</li>
+                    <li>We use Gaussian Blur to blur the images to 6px and also add random noise to 5% of pixels.</li>
                 </ul>
 
-                <h2>Conclusion</h2>
-                <p>The Inter-IIT Vital Extraction Challenge was a significant milestone in our journey of applying AI to healthcare. Our solution not only achieved high accuracy but also demonstrated the practical potential of computer vision in medical applications. The success of this project highlights the importance of interdisciplinary approaches in solving real-world healthcare challenges.</p>
+                <img src="assest/VEC_screen.png" alt="Screen">
+                <p><em>YOLO's outputs for screen segmentation.</em></p>
 
-                <a href="blog.html" class="back-to-blog">
+                <h2>Object detection/extracting vitals :</h2>
+                <ul>
+                    <li>Our first approach to solve this problem was exploring the different operations available and performing literature reviews of the said options. We read up about FasterRCNN, ResNet and YOLO and tried to understand how these models would analyze our data.</li>
+                    <li>After thorough reading and reasoning, we chose YOLO to extract vital signs because YOLO can learn contextual information better than other object detection models.It also has the obvious advantages of better speed and accuracy.</li>
+                </ul>
+
+                <h2>Semi Supervised Learning :</h2>
+                <ul>
+                    <li>We were given a small labeled dataset of 1000 images and unlabelled dataset with 7000 images. Thus the most natural thing to do was to carry out semi-supervised learning of YOLO on both the datasets. We chose <strong>Pseudo-Labelling</strong> , a very simple approach to semi supervised learning.</li>
+                    <li>The model is initially trained on the labeled dataset and is used to make predictions for the unlabeled data. It selects the examples from the unlabeled dataset where the prediction is confident and considers its prediction as pseudo-label. This pseudo labeled dataset is then added to the labeled dataset and the model is then trained again on the expanded labeled dataset.</li>
+                    <li>We developed a function to manipulate our text files such that we chose only the most confident predictions of each class. We then concatenated these predicted labels to the original dataset and retrained our network thereby implementing SSL with pseudo labeling.</li>
+                </ul>
+
+                <img src="assest/VEC_vitals.png" alt="vitals">
+                <p><em>Extracting Vital Signs using YOLOv5m6</em></p>
+
+                <h2>Text extraction:</h2>
+                <ul>
+                    <li>Once the outputs from YOLO are obtained, the only task left is to recognize the numbers within the bounding boxes.</li>
+                    <li>We first implemented EasyOCR, a built-in python library which gave quite unsatisfactory results, so we trained and tested TesseractOCR. The problem with Tesseract is that it has too many modes,making it difficult to identify small and blurry text.</li>
+                    <li><strong>PaddlePaddle</strong> has many benefits over the other architectures mentioned above. PaddlePaddle OCR has state-of-the-art recognition accuracy. It works better than Tesseract when images are in RGB <strong>/</strong> BGR if the image cannot be binarised.It is based on the PaddlePaddle Platform, which is extremely fast and makes our model useful for real time application.</li>
+                    <li>We first convert the RGB image to Grayscale. To adjust for very small bounding boxes generated by YOLO during Vital Sign Extraction, we added a padding of 50 pixels. This made it possible for PaddlePaddleOCR to detect the text easily.</li>
+                </ul>
+
+                <h2>H.R Curve Detection and Digitisation :</h2>
+                <ul>
+                    <li>The task of extracting the curve from the image surprisingly turned out to be more complicated than anticipated. The bounding boxes for the HR graphs contain a lot of text on and around the actual curve making it pretty hard to extract out only the curve.</li>
+                    <li>Performing edge detection and contour tracing on the image did not give satisfactory results.</li>
+                    <li>We then tried to devise an <strong>algorithm</strong> : a kernel would scan the surrounding pixels to the right and follow the direction of the highest intensity pixels, thus essentially scanning a single pixel thick heart rate curve. However, this algorithm had too big of a time complexity to be used in real time and the problem of overlapping text and discontinuity in the curve made the problem too complex.</li>
+                    <li><strong>Finally</strong> we built a network that consists of a noise reducing-network followed by a series of steps to convert the image of the curve to a plot.</li>
+                </ul>
+
+                <div style="margin-left: 4rem;">
+                    <ol style="counter-reset: item; list-style-type: none;">
+                        <li style="position: relative; padding-left: 2rem; margin-bottom: 1rem;">
+                            <span style="position: absolute; left: 0; color: var(--accent-primary);">1.</span>
+                            First we train a YOLOv5s model to learn any noise in the image. For this we manually annotated the H.R. curves with bounding boxes containing any noise near the curve.
+                        </li>
+                        <li style="position: relative; padding-left: 2rem; margin-bottom: 1rem;">
+                            <span style="position: absolute; left: 0; color: var(--accent-primary);">2.</span>
+                            We use the predictions by the aforementioned YOLO network to remove the garbage portions of the image(noise and unnecessary text) by blacking out all the predicted bounding boxes(changing pixel values to 0).
+                        </li>
+                        <li style="position: relative; padding-left: 2rem; margin-bottom: 1rem;">
+                            <span style="position: absolute; left: 0; color: var(--accent-primary);">3.</span>
+                            We then binarize the image, and use contour plotting.
+                        </li>
+                        <li style="position: relative; padding-left: 2rem; margin-bottom: 1rem;">
+                            <span style="position: absolute; left: 0; color: var(--accent-primary);">4.</span>
+                            Finally we sample the obtained image to get a series of points that is displayed as a plot.
+                        </li>
+                    </ol>
+                </div>
+
+                <h2>Hyperparameters:</h2>
+                <p><strong>Yolov5</strong> :</p>
+                <ul>
+                    <li>Adam optimiser with a weight decay of 0.0005 and momentum of 0.937.</li>
+                    <li>initial learning rate of 0.01 and final OneCycleLR learning rate of 0.01.</li>
+                    <li>We used the cosine LR scheduler with maximum learning rate set to the initial learning rate of 0.01 and T_max set to 50.</li>
+                    <li>Our batch size was 32 for the entire pipeline.</li>
+                </ul>
+
+                <h2>Results</h2>
+                <img src="assest/VEC_loss_curves.jpg" alt="loss_curves">
+
+                <div style="overflow-x: auto; margin: 2rem 0;">
+                    <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--bg-secondary);">
+                        <thead>
+                            <tr style="background-color: var(--bg-secondary);">
+                                <th style="padding: 1rem; text-align: left; border: 1px solid var(--bg-secondary);"><strong>Technique</strong></th>
+                                <th style="padding: 1rem; text-align: center; border: 1px solid var(--bg-secondary);"><strong>Accuracy (in %)</strong></th>
+                                <th style="padding: 1rem; text-align: center; border: 1px solid var(--bg-secondary);"><strong>Inference time per image (in seconds)</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 1rem; border: 1px solid var(--bg-secondary);">Screen Extraction with Mask-RCNN → single YOLOv5 network for vitals</td>
+                                <td style="padding: 1rem; text-align: center; border: 1px solid var(--bg-secondary);">90.21</td>
+                                <td style="padding: 1rem; text-align: center; border: 1px solid var(--bg-secondary);">11.57</td>
+                            </tr>
+                            <tr style="background-color: var(--bg-secondary);">
+                                <td style="padding: 1rem; border: 1px solid var(--bg-secondary);"><strong>Screen Extraction with YOLOv5m6 → 2 separate YOLOv5 networks for vitals</strong></td>
+                                <td style="padding: 1rem; text-align: center; border: 1px solid var(--bg-secondary);"><strong>93.723</strong></td>
+                                <td style="padding: 1rem; text-align: center; border: 1px solid var(--bg-secondary);"><strong>2.26</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>Our final pipeline gave a 93.723% accuracy when tested on a randomly chosen set of 1000 images from the given unlabelled dataset, which was manually annotated. The model had an aveVECe inference time of 2.26 seconds per image(a 412% increase in speed from the Mask-RCNN based pipeline)</p>
+
+                <h2>References:</h2>
+                <div style="margin-left: 2rem; margin-top: 1rem;">
+                    <ul style="list-style-type: none; padding: 0;">
+                        <li style="margin-bottom: 1rem;">
+                            <a href="https://arxiv.org/abs/1703.06870" style="text-decoration: none; color: inherit;">
+                                <span style="color: var(--accent-primary);">[1]</span> He, K., Gkioxari, G., Dollár, P., & Girshick, R. (2017). Mask R-CNN. In Proceedings of the IEEE international conference on computer vision (pp. 2961-2969).
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 1rem;">
+                            <a href="https://arxiv.org/abs/1506.02640" style="text-decoration: none; color: inherit;">
+                                <span style="color: var(--accent-primary);">[2]</span> Redmon, J., Divvala, S., Girshick, R., & Farhadi, A. (2016). You only look once: Unified, real-time object detection. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 779-788).
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 1rem;">
+                            <a href="https://arxiv.org/abs/2009.09941" style="text-decoration: none; color: inherit;">
+                                <span style="color: var(--accent-primary);">[3]</span> Du, Y., Li, C., Guo, R., Yin, X., Liu, W., Zhou, J., ... & Wang, Y. (2020). PP-OCR: A practical ultra lightweight OCR system. arXiv preprint arXiv:2009.09941.
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 1rem;">
+                            <a href="https://arxiv.org/abs/1512.03385" style="text-decoration: none; color: inherit;">
+                                <span style="color: var(--accent-primary);">[4]</span> He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 770-778).
+                            </a>
+                        </li>
+                        <li style="margin-bottom: 1rem;">
+                            <a href="https://arxiv.org/abs/2006.05278" style="text-decoration: none; color: inherit;">
+                                <span style="color: var(--accent-primary);">[5]</span> Van Engelen, J. E., & Hoos, H. H. (2020). A survey on semi-supervised learning. Machine Learning, 109(2), 373-440.
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="blog.html" class="back-to-blog" style="text-decoration: none; color: inherit;">
                     <i class="fas fa-arrow-left"></i> Back to Blog
                 </a>
             </div>
