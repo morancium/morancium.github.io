@@ -6,6 +6,440 @@
     <title>Ashish Singh - Data Scientist</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600&display=swap" rel="stylesheet">
+    <style>
+        .gradient-heading {
+            font-family: 'Outfit', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            background: linear-gradient(120deg, #FF6B6B, #4ECDC4, #45B7D1);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+            cursor: default;
+            display: inline-block;
+        }
+
+        /* Navigation styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        [data-theme="dark"] header {
+            background: rgba(18, 18, 18, 0.8);
+        }
+
+        nav.container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            position: relative;
+            gap: 1rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        nav ul li a {
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            color: var(--text-color);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(120deg, #FF6B6B, #4ECDC4, #45B7D1);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a.active::after {
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+            margin: 0;
+            z-index: 1001;
+        }
+
+        #theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+            margin: 0;
+            z-index: 1001;
+        }
+
+        .menu-toggle:hover, #theme-toggle:hover {
+            color: #FF6B6B;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                position: relative;
+                z-index: 1001;
+            }
+
+            nav ul {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--bg-color);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: 1rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: all 0.3s ease;
+                margin: 0;
+                z-index: 999;
+                height: auto;
+                max-height: calc(100vh - 70px);
+                overflow-y: auto;
+                pointer-events: none;
+            }
+
+            nav ul.active {
+                display: flex !important;
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+                background: var(--bg-color);
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            nav ul li a {
+                display: block;
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+                color: var(--text-color);
+                font-weight: 500;
+                transition: all 0.3s ease;
+            }
+
+            nav ul li a:hover {
+                background: var(--hover-color);
+            }
+
+            [data-theme="dark"] nav ul {
+                background: rgba(18, 18, 18, 0.95);
+            }
+
+            [data-theme="light"] nav ul {
+                background: rgba(255, 255, 255, 0.95);
+            }
+
+            .logo-link {
+                order: 2;
+                margin: 0 1rem;
+            }
+
+            .menu-toggle {
+                order: 1;
+                margin-right: 1rem;
+            }
+
+            #theme-toggle {
+                order: 3;
+                margin-left: 1rem;
+            }
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Hero section dynamic gradient styles */
+        #hero {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            opacity: 0.1;
+            transition: opacity 0.3s ease;
+            background: 
+                radial-gradient(circle at 20% 20%, #FF6B6B 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, #4ECDC4 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, #45B7D1 0%, transparent 50%);
+            animation: cloudMove 15s ease-in-out infinite;
+        }
+
+        [data-theme="dark"] #hero::before {
+            opacity: 0.15;
+        }
+
+        @keyframes cloudMove {
+            0% {
+                background-position: 0% 0%, 0% 0%, 0% 0%;
+            }
+            25% {
+                background-position: 10% 10%, 10% 10%, 10% 10%;
+            }
+            50% {
+                background-position: 0% 20%, 20% 0%, 20% 20%;
+            }
+            75% {
+                background-position: 10% 10%, 10% 10%, 10% 10%;
+            }
+            100% {
+                background-position: 0% 0%, 0% 0%, 0% 0%;
+            }
+        }
+
+        /* Animated dots background */
+        #hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0);
+            background-size: 40px 40px;
+            opacity: 0.1;
+            animation: dotsAnimation 20s linear infinite;
+        }
+
+        [data-theme="dark"] #hero::after {
+            opacity: 0.15;
+        }
+
+        @keyframes dotsAnimation {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 40px 40px;
+            }
+        }
+
+        /* Ensure content remains visible */
+        #hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Achievement section styles */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .achievement-card {
+            background: var(--bg-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+        }
+
+        .achievement-card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Inter-IIT Tech Meet - Silver Theme */
+        .achievement-card:nth-child(1) {
+            background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                        linear-gradient(45deg, #C0C0C0, #A9A9A9, #808080) border-box;
+        }
+
+        .achievement-card:nth-child(1):hover {
+            background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                        linear-gradient(45deg, #E0E0E0, #C0C0C0, #A0A0A0) border-box;
+            box-shadow: 0 15px 30px rgba(192, 192, 192, 0.4);
+        }
+
+        .achievement-card:nth-child(1) .achievement-icon {
+            color: #C0C0C0;
+        }
+
+        /* Integration Bee - Gold Theme */
+        .achievement-card:nth-child(2) {
+            background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                        linear-gradient(45deg, #FFD700, #FFA500, #FF8C00) border-box;
+        }
+
+        .achievement-card:nth-child(2):hover {
+            background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                        linear-gradient(45deg, #FFE44D, #FFB74D, #FFA726) border-box;
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .achievement-card:nth-child(2) .achievement-icon {
+            color: #FFD700;
+        }
+
+        /* Amazon ML Summer School - Green Theme */
+        .achievement-card:nth-child(3) {
+            background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                        linear-gradient(45deg, #4CAF50, #45a049, #388E3C) border-box;
+        }
+
+        .achievement-card:nth-child(3):hover {
+            background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                        linear-gradient(45deg, #66BB6A, #4CAF50, #43A047) border-box;
+            box-shadow: 0 15px 30px rgba(76, 175, 80, 0.4);
+        }
+
+        .achievement-card:nth-child(3) .achievement-icon {
+            color: #4CAF50;
+        }
+
+        /* Head AI/ML - Blue Theme */
+        .achievement-card:nth-child(4) {
+            background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                        linear-gradient(45deg, #2196F3, #1976D2, #0D47A1) border-box;
+        }
+
+        .achievement-card:nth-child(4):hover {
+            background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+                        linear-gradient(45deg, #42A5F5, #2196F3, #1E88E5) border-box;
+            box-shadow: 0 15px 30px rgba(33, 150, 243, 0.4);
+        }
+
+        .achievement-card:nth-child(4) .achievement-icon {
+            color: #2196F3;
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card h3 {
+            margin: 1rem 0;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            color: var(--bg-color);
+            mix-blend-mode: difference;
+        }
+
+        .achievement-card p {
+            color: var(--text-color);
+            margin: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-year {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        [data-theme="dark"] .achievement-card {
+            background: var(--bg-color);
+        }
+
+        [data-theme="dark"] .achievement-card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        [data-theme="dark"] .achievement-card:nth-child(1):hover {
+            box-shadow: 0 15px 30px rgba(192, 192, 192, 0.5);
+        }
+
+        [data-theme="dark"] .achievement-card:nth-child(2):hover {
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        [data-theme="dark"] .achievement-card:nth-child(3):hover {
+            box-shadow: 0 15px 30px rgba(76, 175, 80, 0.5);
+        }
+
+        [data-theme="dark"] .achievement-card:nth-child(4):hover {
+            box-shadow: 0 15px 30px rgba(33, 150, 243, 0.5);
+        }
+
+        [data-theme="dark"] .achievement-card h3,
+        [data-theme="dark"] .achievement-card p {
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .achievement-year {
+            color: var(--text-secondary);
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -15,11 +449,8 @@
             </a>
             <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
             <ul>
+                <li><a href="#work" class="active">Work</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#timeline">Timeline</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#achievements">Achievements</a></li>
-                <li><a href="#contact">Contact</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
             <button id="theme-toggle"><i class="fas fa-moon"></i></button>
@@ -35,16 +466,13 @@
                             <img src="assest/ashish2.JPG" alt="Ashish Singh">
                         </div>
                         <div class="profile-text">
-                            <h1>Ashish Singh</h1>
+                            <h1 class="gradient-heading">Hi, I'm Ashish</h1>
                             <p class="subtitle">Data Scientist & Aspiring AI Researcher</p>
-                            <p class="hero-description">Specializing in Computer Vision, Generative AI, and Natural Language Processing</p>
                         </div>
                     </div>
                     <div class="cta-buttons">
                         <a href="#contact" class="btn primary">Get in Touch</a>
-                        <a href="#projects" class="btn secondary">View Projects</a>
-                        <!-- <a href="resume.tex" class="btn secondary" download>Download Resume</a> -->
-                        <a href="https://drive.google.com/file/d/1SCVdlhzP9dBMNA-oBJ6U0pgpj8GxyTzS/view?usp=drive_link" class="btn primary" target="_blank">View Resume</a>
+                        <a href="https://drive.google.com/file/d/1SCVdlhzP9dBMNA-oBJ6U0pgpj8GxyTzS/view?usp=drive_link" class="btn secondary" target="_blank">View Resume</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -73,7 +501,7 @@
             <div class="container">
                 <h2>About Me</h2>
                 <div class="about-content">
-                    <p>I am a passionate Data Scientist with expertise in machine learning, deep learning, and artificial intelligence. My interests focus on developing innovative solutions in computer vision and generative AI, with a special emphasis on making AI systems more explainable and trustworthy. I’m currently working as an Analyst 2 - Data Science at Accordion, where I focus on building GenAI applications and developing intelligent solutions — including SKU categorization and geospatial analytics for optimizing solar panel deployment.</p>
+                    <p>I am a passionate Data Scientist with expertise in machine learning, deep learning, and artificial intelligence. My interests focus on developing innovative solutions in computer vision and generative AI, with a special emphasis on making AI systems more explainable and trustworthy. I'm currently working as an Analyst 2 - Data Science at Accordion, where I focus on building GenAI applications and developing intelligent solutions — including SKU categorization and geospatial analytics for optimizing solar panel deployment.</p>
                     <div class="skills">
                         <h3>Technical Skills</h3>
                         <div class="skill-tags">
@@ -103,12 +531,7 @@
                             <h3>Analyst 2 - Data Science</h3>
                             <p class="timeline-company">Accordion, Hyderabad</p>
                             <p class="timeline-date">June 2024 - Present</p>
-                            <ul class="timeline-details">
-                                <li>Pioneered geospatial analytics by harnessing satellite imagery, sales trends, and demographic insights</li>
-                                <li>Integrated geospatial intelligence into a linear optimization model, identifying 500+ high-potential ZIP codes</li>
-                                <li>Implemented data-driven workforce scheduling, boosting installation efficiency by 50%</li>
-                                <li>Engineered advanced computer vision solutions with semi-supervised learning</li>
-                            </ul>
+                            <p class="timeline-description">Leading geospatial analytics and GenAI initiatives, optimizing solar panel deployment and workforce scheduling.</p>
                         </div>
                     </div>
 
@@ -118,12 +541,7 @@
                             <h3>AI Research Intern - Deepfake Detection</h3>
                             <p class="timeline-company">ConTrails.ai, Remote</p>
                             <p class="timeline-date">April 2024 - June 2024</p>
-                            <ul class="timeline-details">
-                                <li>Designed custom datasets utilizing deepfake generation models</li>
-                                <li>Constructed preprocessing pipeline for YouTube videos</li>
-                                <li>Created high-fidelity deepfake datasets using FaceFusion</li>
-                                <li>Achieved 95% accuracy on custom dataset using Xception model</li>
-                            </ul>
+                            <p class="timeline-description">Developed deepfake detection models achieving 95% accuracy using custom datasets and Xception architecture.</p>
                         </div>
                     </div>
 
@@ -133,11 +551,7 @@
                             <h3>Python and Machine Learning Intern</h3>
                             <p class="timeline-company">Swar Yantra Technologies Pvt. Ltd., Remote</p>
                             <p class="timeline-date">December 2023 - February 2024</p>
-                            <ul class="timeline-details">
-                                <li>Used open-source LLMs and embedding models from HuggingFace</li>
-                                <li>Leveraged Language Models for accurate field extraction</li>
-                                <li>Improved document extraction accuracy by 20%</li>
-                            </ul>
+                            <p class="timeline-description">Enhanced document extraction accuracy by 20% using open-source LLMs and embedding models.</p>
                         </div>
                     </div>
 
@@ -147,11 +561,7 @@
                             <h3>Decision Analytics Intern</h3>
                             <p class="timeline-company">EXL Services, Remote</p>
                             <p class="timeline-date">May 2023 - July 2023</p>
-                            <ul class="timeline-details">
-                                <li>Delivered automated data extraction pipeline using OCR and Regex</li>
-                                <li>Integrated language models for personalized expense reports</li>
-                                <li>Hosted web interface for bank statement analysis</li>
-                            </ul>
+                            <p class="timeline-description">Built automated data extraction pipeline using OCR and language models for personalized expense reports.</p>
                         </div>
                     </div>
 
@@ -162,21 +572,16 @@
                             <p class="timeline-company">Indian Institute of Technology, Roorkee</p>
                             <p class="timeline-date">2020 - 2024</p>
                             <p class="timeline-grade">CGPA: 8.1/10</p>
-                            <ul class="timeline-details">
-                                <li>Head, AI/ML Vertical - Artificial Intelligence and Electronics Society</li>
-                                <li>Silver Medal - Inter-IIT Tech Meet 11.0</li>
-                                <li>Gold Medal - Integration Bee 2023</li>
-                                <li>Top 5% - Amazon ML Summer School</li>
-                            </ul>
+                            <p class="timeline-description">Led AI/ML initiatives, secured Silver Medal at Inter-IIT Tech Meet, and achieved Top 5% in Amazon ML Summer School.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects">
+        <section id="work">
             <div class="container">
-                <h2>Projects</h2>
+                <h2>Work</h2>
                 <div class="project-grid">
                     <div class="project-card">
                         <div class="project-thumbnail">
@@ -184,17 +589,11 @@
                         </div>
                         <div class="project-content">
                             <h3>Open-Sourced RAG</h3>
-                            <p>A comprehensive framework for building and deploying Retrieval-Augmented Generation systems using open-source models and tools.</p>
                             <div class="project-tech">
                                 <span class="tech-tag">Python</span>
                                 <span class="tech-tag">LangChain</span>
                                 <span class="tech-tag">LLMs</span>
                             </div>
-                            <ul class="project-details">
-                                <li>Implemented efficient document retrieval mechanisms</li>
-                                <li>Integrated with various open-source language models</li>
-                                <li>Created a modular architecture for easy customization</li>
-                            </ul>
                             <div class="project-links">
                                 <a href="https://github.com/morancium/open-sourced-RAG" target="_blank"><i class="fab fa-github"></i></a>
                                 <a href="https://github.com/morancium/open-sourced-RAG" target="_blank"><i class="fas fa-external-link-alt"></i></a>
@@ -207,18 +606,12 @@
                         </div>
                         <div class="project-content">
                             <h3>Inter-IIT Vital Extraction Challenge</h3>
-                            <p>A computer vision model to extract vital signs from ECG monitor images, achieving 93% accuracy and securing a Silver Medal at Inter-IIT Tech Meet 11.0.</p>
                             <div class="project-tech">
                                 <span class="tech-tag">Python</span>
                                 <span class="tech-tag">PyTorch</span>
                                 <span class="tech-tag">OpenCV</span>
                                 <span class="tech-tag">YOLO</span>
                             </div>
-                            <ul class="project-details">
-                                <li>Developed advanced computer vision techniques for vital sign extraction</li>
-                                <li>Implemented data augmentation and noise reduction strategies</li>
-                                <li>Optimized inference speed to 2.3 seconds on Google Colab CPU</li>
-                            </ul>
                             <div class="project-links">
                                 <a href="https://github.com/morancium/Inter-IIT-Vital-Extraction-Challenge-IIT-Roorkee" target="_blank"><i class="fab fa-github"></i></a>
                                 <a href="https://github.com/morancium/Inter-IIT-Vital-Extraction-Challenge-IIT-Roorkee" target="_blank"><i class="fas fa-external-link-alt"></i></a>
@@ -231,18 +624,12 @@
                         </div>
                         <div class="project-content">
                             <h3>Image Colorization</h3>
-                            <p>An end-to-end deep learning pipeline for automatic image colorization using Conditional GANs based on the Pix2Pix architecture.</p>
                             <div class="project-tech">
                                 <span class="tech-tag">Python</span>
                                 <span class="tech-tag">PyTorch</span>
                                 <span class="tech-tag">GAN</span>
                                 <span class="tech-tag">COCO dataset</span>
                             </div>
-                            <ul class="project-details">
-                                <li>Developed an automated image colorization model using Conditional GANs</li>
-                                <li>Optimized model performance through adversarial training</li>
-                                <li>Implemented data augmentation and hyperparameter tuning</li>
-                            </ul>
                             <div class="project-links">
                                 <a href="https://github.com/morancium/Image_Colorization" target="_blank"><i class="fab fa-github"></i></a>
                                 <a href="https://github.com/morancium/Image_Colorization" target="_blank"><i class="fas fa-external-link-alt"></i></a>
@@ -255,17 +642,11 @@
                         </div>
                         <div class="project-content">
                             <h3>Neural Style Transfer</h3>
-                            <p>Implementation of neural style transfer algorithms to apply artistic styles to images using deep neural networks.</p>
                             <div class="project-tech">
                                 <span class="tech-tag">Python</span>
                                 <span class="tech-tag">TensorFlow</span>
                                 <span class="tech-tag">CNN</span>
                             </div>
-                            <ul class="project-details">
-                                <li>Implemented various style transfer techniques</li>
-                                <li>Optimized for both quality and performance</li>
-                                <li>Created a user-friendly interface for style application</li>
-                            </ul>
                             <div class="project-links">
                                 <a href="https://github.com/morancium/Neural-style-transfer" target="_blank"><i class="fab fa-github"></i></a>
                                 <a href="https://github.com/morancium/Neural-style-transfer" target="_blank"><i class="fas fa-external-link-alt"></i></a>
@@ -352,6 +733,136 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const heading = document.querySelector('.gradient-heading');
+            const hero = document.querySelector('#hero');
+
+            let gradientX = 120;
+
+            hero.addEventListener('mousemove', (e) => {
+                const { clientX, clientY } = e;
+                const { left, top, width, height } = hero.getBoundingClientRect();
+                
+                const x = (clientX - left) / width;
+                const y = (clientY - top) / height;
+                
+                // Calculate gradient angle based on mouse position
+                gradientX = 50 + (x - 0.5) * 20;
+                
+                // Apply the gradient with original colors
+                const gradient = `linear-gradient(${gradientX}deg, #FF6B6B, #4ECDC4, #45B7D1)`;
+                heading.style.background = gradient;
+                heading.style.backgroundSize = '200% auto';
+                heading.style.webkitBackgroundClip = 'text';
+                heading.style.backgroundClip = 'text';
+                
+                // Add subtle tilt effect
+                const tiltX = (y - 0.5) * 5;
+                const tiltY = (x - 0.5) * -5;
+                heading.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+            });
+
+            // Reset on mouse leave
+            hero.addEventListener('mouseleave', () => {
+                heading.style.background = 'linear-gradient(120deg, #FF6B6B, #4ECDC4, #45B7D1)';
+                heading.style.backgroundSize = '200% auto';
+                heading.style.webkitBackgroundClip = 'text';
+                heading.style.backgroundClip = 'text';
+                heading.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('nav ul');
+            const menuIcon = menuToggle.querySelector('i');
+            let isMenuOpen = false;
+
+            function toggleMenu() {
+                isMenuOpen = !isMenuOpen;
+                navMenu.classList.toggle('active');
+                
+                if (isMenuOpen) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                    document.body.style.overflow = 'hidden';
+                    // Force a reflow to ensure the display change takes effect
+                    navMenu.offsetHeight;
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // Prevent event bubbling for the menu toggle button
+            menuToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMenu();
+            }, true);
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (isMenuOpen && !e.target.closest('nav')) {
+                    toggleMenu();
+                }
+            });
+
+            // Close menu when clicking a link
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) {
+                        toggleMenu();
+                    }
+                });
+            });
+
+            // Navigation active state handling
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const sections = document.querySelectorAll('section[id]');
+
+            function setActiveLink() {
+                const scrollPosition = window.scrollY;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+
+            // Smooth scroll for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        const targetSection = document.querySelector(targetId);
+                        
+                        if (targetSection) {
+                            window.scrollTo({
+                                top: targetSection.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            window.addEventListener('scroll', setActiveLink);
+            setActiveLink(); // Set initial active state
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html> 
