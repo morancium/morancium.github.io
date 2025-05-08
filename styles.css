@@ -742,6 +742,24 @@ section h2 {
     color: var(--accent-primary) !important;
 }
 
+.achievement-card a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    height: 100%;
+}
+
+.achievement-card a:hover {
+    color: inherit;
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    border-color: var(--highlight-primary);
+    cursor: pointer;
+}
+
 /* Contact Section */
 .contact-content {
     max-width: 600px;
@@ -1000,6 +1018,9 @@ footer {
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .blog-card:hover {
@@ -1026,20 +1047,15 @@ footer {
 
 .blog-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
-.blog-meta {
+.blog-content-link {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-}
-
-.blog-date, .blog-category {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    flex-direction: column;
+    flex: 1;
 }
 
 .blog-content h3 {
@@ -1050,22 +1066,69 @@ footer {
 
 .blog-excerpt {
     color: var(--text-secondary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     line-height: 1.6;
+    flex: 1;
+}
+
+.blog-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.tech-tag {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background-color: var(--highlight-primary);
+    color: var(--bg-primary);
+    border-radius: 15px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    align-self: flex-start;
+}
+
+.blog-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.github-link {
+    display: flex;
+    align-items: center;
+}
+
+.github-link img {
+    transition: transform 0.3s ease;
+}
+
+.github-link:hover img {
+    transform: scale(1.1);
+}
+
+[data-theme="dark"] .github-link img {
+    filter: invert(1);
 }
 
 .read-more {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--primary-color);
-    text-decoration: none;
+    color: var(--accent-primary);
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .read-more:hover {
-    color: var(--primary-color-dark);
+    color: var(--highlight-primary);
+    transform: translateX(4px);
 }
 
 .read-more i {
@@ -1137,4 +1200,109 @@ nav ul li a.active {
 
 .github-link:hover {
     text-decoration: none;
+}
+
+/* Mobile Navigation Styles */
+@media (max-width: 768px) {
+    nav.container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        position: relative;
+        gap: 1rem;
+    }
+
+    .logo-link {
+        order: 2;
+        margin: 0 1rem;
+    }
+
+    .menu-toggle {
+        order: 1;
+        display: flex;
+        margin-right: 1rem;
+    }
+
+    #theme-toggle {
+        order: 3;
+        margin-left: 1rem;
+    }
+
+    nav ul {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--bg-primary);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 1rem 0;
+        gap: 1rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        margin: 0;
+        z-index: 999;
+        height: auto;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        pointer-events: none;
+    }
+
+    nav ul.active {
+        display: flex !important;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    nav ul li {
+        height: auto;
+        width: 100%;
+    }
+
+    nav ul li a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        color: var(--text-color);
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        background: var(--hover-color);
+    }
+
+    [data-theme="dark"] nav ul {
+        background: rgba(18, 18, 18, 0.95);
+    }
+
+    [data-theme="light"] nav ul {
+        background: rgba(255, 255, 255, 0.95);
+    }
+}
+
+.github-link img {
+    transition: transform 0.3s ease;
+}
+
+.github-link:hover img {
+    transform: scale(1.1);
+}
+
+[data-theme="dark"] .github-link img {
+    filter: invert(1);
+}
+
+.tech-tag:hover {
+    background-color: var(--highlight-secondary);
+    transform: translateY(-2px);
 } 
