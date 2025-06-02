@@ -155,7 +155,7 @@
                 
                 <p>The Single Simple Patch (SSP) method, introduced in the paper "<a href="https://github.com/bcmi/SSP-AI-Generated-Image-Detection" target="_blank" class="link-no-blue">A Single Simple Patch is All You Need for AI-generated Image Detection</a>", represents a novel approach to detecting AI-generated images. The original implementation uses Spatial Rich Model (SRM) features and a ResNet classifier to analyze image patches for synthetic content detection. The method has shown promising results on the GenImage dataset, which contains images from eight different AI generators including BigGAN, Stable Diffusion v4/v5, VQDM, Wukong, ADM, GLIDE, and Midjourney.</p>
 
-                <p>I recently contributed an enhancement to this open-source project, building upon its core architecture while addressing some of its limitations.</p>
+                <p>I recently added an enhancement to this open-source project, building upon its core architecture while addressing some of its limitations.</p>
 
                 <h2>What's New in My Enhancement?</h2>
 
@@ -198,6 +198,7 @@
                     <li>ResNet50 Classifier: A deep learning model trained to distinguish between AI-generated and natural images</li>
                     <li>Patch Processing Pipeline: Enhanced with intelligent patch selection and multi-patch support</li>
                     <li>Improved Preprocessing: Modified the original preprocessing pipeline to better handle image normalization and patch extraction, resulting in more consistent feature representation</li>
+                    <li>Vectorized Scoring Function: Implemented a fast, vectorized scoring mechanism that efficiently processes multiple patches, significantly reducing computation time when dealing with large numbers of patches</li>
                 </ul>
 
                 <p>The system can be trained and validated using the provided train_val.sh script, and tested using test.sh. The model supports both single-patch and multi-patch configurations, allowing for flexible deployment based on specific use cases.</p>
