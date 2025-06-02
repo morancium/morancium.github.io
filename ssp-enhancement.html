@@ -201,7 +201,48 @@
                     <li>Vectorized Scoring Function: Implemented a fast, vectorized scoring mechanism that efficiently processes multiple patches, significantly reducing computation time when dealing with large numbers of patches</li>
                 </ul>
 
-                <p>The system can be trained and validated using the provided train_val.sh script, and tested using test.sh. The model supports both single-patch and multi-patch configurations, allowing for flexible deployment based on specific use cases.</p>
+                <h3>Code Optimization: Vectorized Patch Scoring</h3>
+                <p>The original implementation processed patches one at a time, which became a bottleneck when dealing with multiple patches. Here's how the scoring function was optimized:</p>
+
+                <p>Original implementation (processing one patch at a time):</p>
+                <pre><code class="language-python">def compute(patch):
+    weight, height = patch.size
+    m = weight
+    res = 0
+    patch = np.array(patch).astype(np.int64)
+    diff_horizontal = np.sum(np.abs(patch[:, :-1, :] - patch[:, 1:, :]))
+    diff_vertical = np.sum(np.abs(patch[:-1, :, :] - patch[1:, :, :]))
+    diff_diagonal = np.sum(np.abs(patch[:-1, :-1, :] - patch[1:, 1:, :]))
+    diff_diagonal += np.sum(np.abs(patch[1:, :-1, :] - patch[:-1, 1:, :]))
+    res = diff_horizontal + diff_vertical + diff_diagonal
+    return res.sum()</code></pre>
+
+                <p>Optimized vectorized implementation (processing multiple patches in parallel):</p>
+                <pre><code class="language-python">def fast_compute(patches):
+    # patches: (B, C, H, W)
+    B, C, H, W = patches.shape
+
+    # Compute differences
+    diff_horizontal = torch.abs(patches[:, :, :, :-1] - patches[:, :, :, 1:])  # (B, C, H, W-1)
+    diff_vertical   = torch.abs(patches[:, :, :-1, :] - patches[:, :, 1:, :])  # (B, C, H-1, W)
+    diff_diag1      = torch.abs(patches[:, :, :-1, :-1] - patches[:, :, 1:, 1:])  # (B, C, H-1, W-1)
+    diff_diag2      = torch.abs(patches[:, :, 1:, :-1] - patches[:, :, :-1, 1:])  # (B, C, H-1, W-1)
+
+    # Sum all differences
+    res = (
+        diff_horizontal.sum(dim=(1, 2, 3)) + 
+        diff_vertical.sum(dim=(1, 2, 3)) + 
+        diff_diag1.sum(dim=(1, 2, 3)) + 
+        diff_diag2.sum(dim=(1, 2, 3))
+    )
+
+    return res  # shape: (B,)</code></pre>
+
+                <p> </p>
+                <p>Key improvements in the optimized version introduces several key enhancements that boost both performance and efficiency. It employs batch processing to handle multiple patches simultaneously using PyTorch tensors and fully vectorized operations. While preserving the original mathematical logic, the implementation achieves greater memory efficiency. Additionally, it leverages GPU acceleration when available and reduces overhead by eliminating redundant Python-level operations and unnecessary NumPy conversions.</p> 
+                <p>The optimized version is particularly beneficial when using the whole-image approach (path_selection=2), as it efficiently handles the increased number of patches without compromising performance.</p>
+
+                <p>The system can be trained and validated using the provided train_val.sh script, and tested using test.sh. The model supports both single-patch and multi-patch configurations, allowing for flexible deployment based on specific use cases. The vectorized scoring function is particularly beneficial when using the whole-image approach (path_selection=2), as it efficiently handles the increased number of patches without compromising performance.</p>
 
                 <h2>Performance Considerations</h2>
                 <p>The enhanced version maintains the efficiency of the original SSP method while providing more robust detection capabilities. The Top-K patch selection strategy adds minimal computational overhead while significantly improving detection accuracy, especially for complex images where critical features might be distributed across multiple regions.</p>
