@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSP Enhancement - Ashish Singh</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assest/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assest/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assest/apple-touch-icon.png">
+    <link rel="manifest" href="assest/site.webmanifest">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ashishsingh.dev/ssp-enhancement.html">
+    <meta property="og:title" content="Enhancing AI-Generated Image Detection with Smarter Patch Selection">
+    <meta property="og:description" content="Improving the Single Simple Patch (SSP) method for AI-generated image detection through intelligent patch selection, multi-patch support, and enhanced preprocessing techniques.">
+    <meta property="og:image" content="https://ashishsingh.dev/assest/ssp-thumbnail.png">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ashishsingh.dev/ssp-enhancement.html">
+    <meta property="twitter:title" content="Enhancing AI-Generated Image Detection with Smarter Patch Selection">
+    <meta property="twitter:description" content="Improving the Single Simple Patch (SSP) method for AI-generated image detection through intelligent patch selection, multi-patch support, and enhanced preprocessing techniques.">
+    <meta property="twitter:image" content="https://ashishsingh.dev/assest/ssp-thumbnail.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600&display=swap" rel="stylesheet">
+    <!-- Prism.js CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .blog-post img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .blog-post h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-post .meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            align-items: center;
+        }
+        .blog-post .content {
+            line-height: 1.8;
+        }
+        .blog-post .content h2 {
+            margin: 2rem 0 1rem;
+            color: var(--accent-primary);
+        }
+        .blog-post .content p {
+            margin-bottom: 1.5rem;
+        }
+        .blog-post .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        .blog-post .content li {
+            margin-bottom: 0.5rem;
+        }
+        .blog-post .content code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+        .back-to-blog:hover {
+            color: var(--accent-secondary);
+        }
+        .github-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        .github-link:hover {
+            color: var(--accent-primary);
+        }
+        .insight-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent-primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .insight-box h3 {
+            color: var(--accent-primary);
+            margin-top: 0;
+        }
+        pre {
+            background: #f8f9fa !important;
+            padding: 1rem;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 1.5rem 0;
+            font-family: monospace;
+            line-height: 1.5;
+        }
+        pre code {
+            background: #f8f9fa !important;
+            padding: 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">AS</div>
+            </a>
+            <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <ul>
+                <li><a href="index.html#work">Work</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+        </nav>
+    </header>
+
+    <main>
+        <article class="blog-post">
+            <h1>Enhancing AI-Generated Image Detection with Smarter Patch Selection</h1>
+            <div class="meta">
+                <span><i class="far fa-calendar"></i> March 2024</span>
+                <span><i class="far fa-folder"></i> AI & Computer Vision</span>
+                <a href="https://github.com/bcmi/SSP-AI-Generated-Image-Detection" class="github-link" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <div class="content">
+                <img src="assest\SSP-pipeline.png" alt="SSP Enhancement Project">
+                
+                <p>The Single Simple Patch (SSP) method, introduced in the paper "<a href="https://github.com/bcmi/SSP-AI-Generated-Image-Detection" target="_blank">A Single Simple Patch is All You Need for AI-generated Image Detection</a>", represents a novel approach to detecting AI-generated images. The original implementation uses Spatial Rich Model (SRM) features and a ResNet classifier to analyze image patches for synthetic content detection. The method has shown promising results on the GenImage dataset, which contains images from eight different AI generators including BigGAN, Stable Diffusion v4/v5, VQDM, Wukong, ADM, GLIDE, and Midjourney.</p>
+
+                <p>I recently contributed an enhancement to this open-source project, building upon its core architecture while addressing some of its limitations.</p>
+
+                <h2>What's New in My Enhancement?</h2>
+
+                <h3>✅ Top-K Patch Selection Instead of Random Patches</h3>
+                <p>The original implementation randomly selected a single patch from the image before feeding it through the SRM filters and ResNet classifier. This often led to suboptimal results, especially when critical features were missed.</p>
+
+                <p>I replaced the random patch selection mechanism with a Top-K patch selection strategy, which identifies and sends the most informative patches to the classifier based on a scoring mechanism. This increases robustness and helps the model focus on areas with the highest potential signal.</p>
+
+                <h3>✅ Multi-Patch Support</h3>
+                <p>Previously, the system supported only a single patch per image for classification.</p>
+
+                <p>Now, you can send multiple top-K patches (configurable) to the ResNet classifier. This allows the system to leverage more information from various parts of the image, improving overall detection accuracy.</p>
+
+                <h3>✅ Optional Full Image Classification</h3>
+                <p>In some scenarios, treating the whole image as a signal source is more effective than relying on patches alone.</p>
+
+                <p>You can now resize the entire image to 256x256, split it into patches, and run it through the same SRM + ResNet pipeline. This opens up new flexibility depending on the detection task.</p>
+
+                <h2>How to Use the New Features</h2>
+                <pre><code class="language-bash"># Choose number of top patches to select
+--top_k_patches 5
+
+# Path selection strategy (0: top-k min, 1: top-k max, 2: whole image with patches)
+--path_selection 2</code></pre>
+
+                <p>These arguments can be toggled to test different configurations and find what works best for your dataset or detection task. The path selection strategy offers three distinct approaches:</p>
+                <ul>
+                    <li><strong>0 (Top-K Min):</strong> Selects patches with the lowest scores, focusing on areas that might contain subtle artifacts</li>
+                    <li><strong>1 (Top-K Max):</strong> Selects patches with the highest scores, focusing on areas with the most prominent features</li>
+                    <li><strong>2 (Whole Image with Patches):</strong> Processes the entire image by splitting it into patches, providing the most comprehensive analysis</li>
+                </ul>
+
+                <p>Based on my testing, option 2 (whole image with patches) combined with averaging the predictions consistently yields the best results, as it captures both local and global features of the image.</p>
+
+                <h2>Technical Implementation Details</h2>
+                <p>The enhanced implementation maintains compatibility with the original project's environment setup. The system requires Python and can be set up using the provided requirements.txt file. The core components include:</p>
+
+                <ul>
+                    <li>SRM Feature Extraction: Processes image patches to extract rich spatial features</li>
+                    <li>ResNet50 Classifier: A deep learning model trained to distinguish between AI-generated and natural images</li>
+                    <li>Patch Processing Pipeline: Enhanced with intelligent patch selection and multi-patch support</li>
+                    <li>Improved Preprocessing: Modified the original preprocessing pipeline to better handle image normalization and patch extraction, resulting in more consistent feature representation</li>
+                </ul>
+
+                <p>The system can be trained and validated using the provided train_val.sh script, and tested using test.sh. The model supports both single-patch and multi-patch configurations, allowing for flexible deployment based on specific use cases.</p>
+
+                <h2>Performance Considerations</h2>
+                <p>The enhanced version maintains the efficiency of the original SSP method while providing more robust detection capabilities. The Top-K patch selection strategy adds minimal computational overhead while significantly improving detection accuracy, especially for complex images where critical features might be distributed across multiple regions.</p>
+
+                <p>For optimal performance, users can experiment with different values of K (number of patches) and decide whether to use the full-image processing option based on their specific requirements and computational resources.</p>
+
+                <div class="insight-box">
+                    <h3>💡 Personal Finding</h3>
+                    <p>Through extensive testing, I found that averaging the predictions from all patches and sending them to the detector consistently yields the best results. This approach helps capture a more comprehensive view of the image's characteristics and reduces the impact of any single patch's potential misclassification.</p>
+                </div>
+
+                <h2>Why It Matters</h2>
+                <p>AI-generated content is getting harder to detect as generation models improve. By shifting from random sampling to intelligent selection and expanding the input strategy, we empower the detector to catch subtle generative artifacts with greater confidence.</p>
+
+                <p>If you're working in media forensics, AI content regulation, or deepfake detection, I invite you to explore the enhanced version and share feedback.</p>
+
+                <a href="blog.html" class="back-to-blog">
+                    <i class="fas fa-arrow-left"></i> Back to Blog
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Ashish Singh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+</body>
+</html> 
