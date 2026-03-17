@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
     <link rel="manifest" href="assest/site.webmanifest">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ashishsingh.dev/blog.html">
@@ -36,7 +36,7 @@
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="blog.html" class="active">Blog</a></li>
             </ul>
-            <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+            <button id="theme-toggle"><i class="fas fa-sun"></i></button>
         </nav>
     </header>
 
@@ -44,24 +44,36 @@
         <section id="blog">
             <div class="container">
                 <h2>Blog</h2>
+
+                <!-- Filter bar -->
+                <div class="blog-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="computer-vision">Computer Vision</button>
+                    <button class="filter-btn" data-filter="nlp">NLP</button>
+                    <button class="filter-btn" data-filter="deep-learning">Deep Learning</button>
+                    <button class="filter-btn" data-filter="machine-learning">Machine Learning</button>
+                </div>
+
                 <div class="blog-grid">
-                    <!-- SSP Enhancement Blog Post -->
-                    <div class="blog-card">
-                        <a href="ssp-enhancement.html" class="blog-link no-underline">
+
+                    <!-- SSP Enhancement -->
+                    <div class="blog-card" data-category="computer-vision">
+                        <a href="ssp-enhancement.html" class="no-underline">
                             <div class="blog-thumbnail">
-                                <img src="assest/SSP-pipeline.png" alt="SSP Enhancement Project">
+                                <img src="assest/SSP-pipeline.png" alt="SSP Enhancement Project" loading="lazy">
                             </div>
                         </a>
                         <div class="blog-content">
                             <a href="ssp-enhancement.html" class="blog-content-link no-underline">
                                 <h3>Enhancing AI-Generated Image Detection with Smarter Patch Selection</h3>
-                                <p class="blog-excerpt">Improving the Single Simple Patch (SSP) method for AI-generated image detection through intelligent patch selection, multi-patch support, and enhanced preprocessing techniques.</p>
                             </a>
+                            <span class="read-time"><i class="far fa-clock"></i> 5 min read</span>
+                            <p class="blog-excerpt">Improving the SSP method for AI-generated image detection through intelligent Top-K patch selection, multi-patch support, and vectorized preprocessing.</p>
                             <div class="blog-footer">
-                                <span class="tech-tag">AI & Computer Vision</span>
+                                <span class="tech-tag">Computer Vision</span>
                                 <div class="blog-links">
                                     <a href="https://github.com/bcmi/SSP-AI-Generated-Image-Detection" class="github-link no-underline" target="_blank" rel="noopener noreferrer">
-                                        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="24" height="24">
+                                        <i class="fab fa-github" style="font-size:1.2rem"></i>
                                     </a>
                                     <a href="ssp-enhancement.html" class="read-more no-underline">Read More <i class="fas fa-arrow-right"></i></a>
                                 </div>
@@ -69,23 +81,24 @@
                         </div>
                     </div>
 
-                    <!-- Image Colorization Blog Post -->
-                    <div class="blog-card">
-                        <a href="image-colorization.html" class="blog-link no-underline">
+                    <!-- Image Colorization -->
+                    <div class="blog-card" data-category="computer-vision">
+                        <a href="image-colorization.html" class="no-underline">
                             <div class="blog-thumbnail">
-                                <img src="assest/colorization-thumbnail.png" alt="Image Colorization Project">
+                                <img src="assest/colorization-thumbnail.png" alt="Image Colorization Project" loading="lazy">
                             </div>
                         </a>
                         <div class="blog-content">
                             <a href="image-colorization.html" class="blog-content-link no-underline">
                                 <h3>Bringing Color to Black and White Images with Deep Learning</h3>
-                                <p class="blog-excerpt">Exploring the implementation of a conditional GAN-based image colorization system that breathes new life into black and white imagery through deep learning techniques.</p>
                             </a>
+                            <span class="read-time"><i class="far fa-clock"></i> 4 min read</span>
+                            <p class="blog-excerpt">A conditional GAN-based image colorization system that breathes new life into B&W imagery using a ResNet U-Net architecture trainable on consumer GPUs.</p>
                             <div class="blog-footer">
-                                <span class="tech-tag">AI & Computer Vision</span>
+                                <span class="tech-tag">Computer Vision</span>
                                 <div class="blog-links">
                                     <a href="https://github.com/morancium/Image_Colorization" class="github-link no-underline" target="_blank" rel="noopener noreferrer">
-                                        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="24" height="24">
+                                        <i class="fab fa-github" style="font-size:1.2rem"></i>
                                     </a>
                                     <a href="image-colorization.html" class="read-more no-underline">Read More <i class="fas fa-arrow-right"></i></a>
                                 </div>
@@ -93,23 +106,24 @@
                         </div>
                     </div>
 
-                    <!-- Open-Sourced RAG Blog Post -->
-                    <div class="blog-card">
-                        <a href="open-sourced-rag.html" class="blog-link no-underline">
+                    <!-- Open-Sourced RAG -->
+                    <div class="blog-card" data-category="nlp">
+                        <a href="open-sourced-rag.html" class="no-underline">
                             <div class="blog-thumbnail">
-                                <img src="assest/rag-thumbnail.png" alt="Open-Sourced RAG Pipeline">
+                                <img src="assest/rag-thumbnail.png" alt="Open-Sourced RAG Pipeline" loading="lazy">
                             </div>
                         </a>
                         <div class="blog-content">
                             <a href="open-sourced-rag.html" class="blog-content-link no-underline">
                                 <h3>Open-Sourced RAG Pipeline: Revolutionizing Document Processing</h3>
-                                <p class="blog-excerpt">A comprehensive guide to our open-sourced Retrieval-Augmented Generation pipeline, featuring multi-format document support, state-of-the-art language models, and efficient vector storage.</p>
                             </a>
+                            <span class="read-time"><i class="far fa-clock"></i> 4 min read</span>
+                            <p class="blog-excerpt">A comprehensive local RAG pipeline with multi-format document support, ChromaDB vector storage, and 4 state-of-the-art open-source language models.</p>
                             <div class="blog-footer">
-                                <span class="tech-tag">AI & NLP</span>
+                                <span class="tech-tag">NLP</span>
                                 <div class="blog-links">
                                     <a href="https://github.com/morancium/open-sourced-RAG" class="github-link no-underline" target="_blank" rel="noopener noreferrer">
-                                        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="24" height="24">
+                                        <i class="fab fa-github" style="font-size:1.2rem"></i>
                                     </a>
                                     <a href="open-sourced-rag.html" class="read-more no-underline">Read More <i class="fas fa-arrow-right"></i></a>
                                 </div>
@@ -117,23 +131,24 @@
                         </div>
                     </div>
 
-                    <!-- Inter-IIT Vital Extraction Challenge Blog Post -->
-                    <div class="blog-card">
-                        <a href="vital-extraction-challenge.html" class="blog-link no-underline">
+                    <!-- Vital Extraction -->
+                    <div class="blog-card" data-category="computer-vision">
+                        <a href="vital-extraction-challenge.html" class="no-underline">
                             <div class="blog-thumbnail">
-                                <img src="assest/vital-extraction-thumbnail.png" alt="Inter-IIT Vital Extraction Challenge">
+                                <img src="assest/vital-extraction-thumbnail.png" alt="Inter-IIT Vital Extraction Challenge" loading="lazy">
                             </div>
                         </a>
                         <div class="blog-content">
                             <a href="vital-extraction-challenge.html" class="blog-content-link no-underline">
-                                <h3>Inter-IIT Vital Extraction Challenge: Revolutionizing Healthcare with Computer Vision</h3>
-                                <p class="blog-excerpt">A deep dive into our award-winning solution for extracting vital signs from ECG monitor images using advanced computer vision techniques.</p>
+                                <h3>Inter-IIT Vital Extraction Challenge: Healthcare with Computer Vision</h3>
                             </a>
+                            <span class="read-time"><i class="far fa-clock"></i> 5 min read</span>
+                            <p class="blog-excerpt">Our Silver Medal winning solution for extracting vital signs from ECG monitors — 93.7% accuracy and 4× faster than the Mask-RCNN baseline.</p>
                             <div class="blog-footer">
-                                <span class="tech-tag">AI & Computer Vision</span>
+                                <span class="tech-tag">Computer Vision</span>
                                 <div class="blog-links">
                                     <a href="https://github.com/morancium/Inter-IIT-Vital-Extraction-Challenge-IIT-Roorkee" class="github-link no-underline" target="_blank" rel="noopener noreferrer">
-                                        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="24" height="24">
+                                        <i class="fab fa-github" style="font-size:1.2rem"></i>
                                     </a>
                                     <a href="vital-extraction-challenge.html" class="read-more no-underline">Read More <i class="fas fa-arrow-right"></i></a>
                                 </div>
@@ -141,23 +156,24 @@
                         </div>
                     </div>
 
-                    <!-- Neural Style Transfer Blog Post -->
-                    <div class="blog-card">
-                        <a href="neural-style-transfer.html" class="blog-link no-underline">
+                    <!-- Neural Style Transfer -->
+                    <div class="blog-card" data-category="machine-learning">
+                        <a href="neural-style-transfer.html" class="no-underline">
                             <div class="blog-thumbnail">
-                                <img src="assest/style-transfer-thumbnail.png" alt="Neural Style Transfer Project">
+                                <img src="assest/style-transfer-thumbnail.png" alt="Neural Style Transfer Project" loading="lazy">
                             </div>
                         </a>
                         <div class="blog-content">
                             <a href="neural-style-transfer.html" class="blog-content-link no-underline">
                                 <h3>Understanding Neural Style Transfer: A Deep Dive into Artistic AI</h3>
-                                <p class="blog-excerpt">Exploring the fascinating world of Neural Style Transfer (NST), where we combine the content of one image with the artistic style of another using deep learning techniques.</p>
                             </a>
+                            <span class="read-time"><i class="far fa-clock"></i> 4 min read</span>
+                            <p class="blog-excerpt">VGG19-based neural style transfer combining Gram matrix style loss and content preservation for arbitrary artistic image synthesis.</p>
                             <div class="blog-footer">
-                                <span class="tech-tag">AI & Machine Learning</span>
+                                <span class="tech-tag">Machine Learning</span>
                                 <div class="blog-links">
                                     <a href="https://github.com/morancium/Neural-style-transfer" class="github-link no-underline" target="_blank" rel="noopener noreferrer">
-                                        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="24" height="24">
+                                        <i class="fab fa-github" style="font-size:1.2rem"></i>
                                     </a>
                                     <a href="neural-style-transfer.html" class="read-more no-underline">Read More <i class="fas fa-arrow-right"></i></a>
                                 </div>
@@ -165,23 +181,24 @@
                         </div>
                     </div>
 
-                    <!-- Pixel Spotter Blog Post -->
-                    <div class="blog-card">
-                        <a href="pixel-spotter.html" class="blog-link no-underline">
+                    <!-- Pixel Spotter -->
+                    <div class="blog-card" data-category="deep-learning">
+                        <a href="pixel-spotter.html" class="no-underline">
                             <div class="blog-thumbnail">
-                                <img src="assest/pixel-spotter-thumbnail.png" alt="Pixel Spotter Project">
+                                <img src="assest/pixel-spotter-thumbnail.png" alt="Pixel Spotter Project" loading="lazy">
                             </div>
                         </a>
                         <div class="blog-content">
                             <a href="pixel-spotter.html" class="blog-content-link no-underline">
                                 <h3>Pixel Spotter: Deep Learning for Precise Pixel Localization</h3>
-                                <p class="blog-excerpt">A deep learning approach to predict the coordinates of a single white pixel in a 50x50 grayscale image, comparing baseline CNN and pre-trained ResNet18 models.</p>
                             </a>
+                            <span class="read-time"><i class="far fa-clock"></i> 3 min read</span>
+                            <p class="blog-excerpt">Comparing a custom CNN vs. pre-trained ResNet18 for pixel-precise coordinate prediction from 2500 synthetic 50×50 grayscale images.</p>
                             <div class="blog-footer">
-                                <span class="tech-tag">AI & Deep Learning</span>
+                                <span class="tech-tag">Deep Learning</span>
                                 <div class="blog-links">
                                     <a href="https://github.com/morancium/pixel-spotter" class="github-link no-underline" target="_blank" rel="noopener noreferrer">
-                                        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="24" height="24">
+                                        <i class="fab fa-github" style="font-size:1.2rem"></i>
                                     </a>
                                     <a href="pixel-spotter.html" class="read-more no-underline">Read More <i class="fas fa-arrow-right"></i></a>
                                 </div>
@@ -189,21 +206,6 @@
                         </div>
                     </div>
 
-                    <!-- Coming Soon Post -->
-                    <!-- <div class="blog-card">
-                        <div class="blog-thumbnail">
-                            <img src="assest/blog-placeholder.jpg" alt="Blog Post Thumbnail">
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span class="blog-date">May 1, 2025</span>
-                                <span class="blog-category">AI & Machine Learning</span>
-                            </div>
-                            <h3>Coming Soon: My First Blog Post</h3>
-                            <p class="blog-excerpt">Stay tuned for insightful articles about AI, machine learning, and my experiences in the field.</p>
-                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </section>
@@ -211,10 +213,14 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Ashish Singh. All rights reserved.</p>
+            <p>&copy; <span class="year"></span> Ashish Singh. All rights reserved.</p>
         </div>
     </footer>
 
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
