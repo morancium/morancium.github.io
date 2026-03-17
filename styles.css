@@ -15,6 +15,11 @@
     --section-bg: #f8f9fa;
     --nav-active: #FF6B6B;
     --transition-duration: 0.3s;
+    /* Aliases for compatibility */
+    --text-color: var(--text-primary);
+    --primary-color: var(--accent-primary);
+    --bg-color: var(--bg-primary);
+    --hover-color: var(--highlight-primary);
 }
 
 [data-theme="dark"] {
@@ -32,6 +37,11 @@
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     --section-bg: #1a1a1a;
     --nav-active: #FF6B6B;
+    /* Aliases for compatibility */
+    --text-color: var(--text-primary);
+    --primary-color: var(--accent-primary);
+    --bg-color: var(--bg-primary);
+    --hover-color: var(--highlight-primary);
 }
 
 /* Reset and base styles */
