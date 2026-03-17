@@ -23,7 +23,7 @@
     <meta property="twitter:image" content="https://ashishsingh.dev/assest/android-chrome-512x512.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -417,7 +417,10 @@
                 const x = (clientX - left) / width;
                 const y = (clientY - top) / height;
                 const angle = 120 + (x - 0.5) * 30;
-                heading.style.background = `linear-gradient(${angle}deg, #818CF8, #6366F1, #06B6D4)`;
+                const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+                heading.style.background = isDark
+                    ? `linear-gradient(${angle}deg, #FFFFFF, #888888, #F0F0F0)`
+                    : `linear-gradient(${angle}deg, #0A0A0A, #444444, #111111)`;
                 heading.style.backgroundSize = '250% auto';
                 heading.style.webkitBackgroundClip = 'text';
                 heading.style.backgroundClip = 'text';
