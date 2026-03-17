@@ -499,22 +499,11 @@ nav a.active::after {
     width: 320px;
     height: 320px;
     border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid transparent;
-    background: var(--gradient) border-box;
+    padding: 3px;
+    background: var(--gradient);
     box-shadow: var(--shadow-accent);
     position: relative;
     z-index: 2;
-}
-
-.profile-photo-large::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    border-radius: 50%;
-    background: var(--gradient);
-    z-index: -1;
-    padding: 3px;
 }
 
 .profile-photo-large img {
@@ -522,6 +511,7 @@ nav a.active::after {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
+    display: block;
 }
 
 /* Legacy profile-photo class (used in some pages) */
